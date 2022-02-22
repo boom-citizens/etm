@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments.html :: header('Organization Details Page')">
+</head>
+<body>
+<header>
+    <section th:include="fragments.html :: navbar"></section>
+</header>
+<main>
+
+    <div class="container mt-5">
+        <img th:src="@{${organization.logo}}" class="rounded float-end" alt="logo" th:width="400px" th:align="right"/>
+        <dl class="row">
+            <dt class="col-sm-3">Organization name</dt>
+            <dd class="col-sm-9" th:text="${organization.name}"></dd>
+
+            <dt class="col-sm-3">Email</dt>
+            <dd class="col-sm-9" th:text="${organization.email}"></dd>
+
+            <dt class="col-sm-3">Code</dt>
+            <dd class="col-sm-9" th:text="${organization.code}"></dd>
+
+            <dt class="col-sm-3">Location</dt>
+            <dd class="col-sm-9" th:text="${organization.location}"></dd>
+        </dl>
+
+        <a th:href="@{{filepath}(filepath = ${organization.logo})}" class="btn btn-primary">Download logo</a>
+        ||
+        <a th:href="@{/organization/update/{id}/(id=${organization.id}) }" class="btn btn-secondary">Update</a>
+    </div>
+</main>
+<footer>
+    <section th:include="fragments.html :: js"></section>
+</footer>
+</body>
+</html>

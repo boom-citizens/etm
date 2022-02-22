@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments.html :: header('Organizations')">
+</head>
+<body>
+<header>
+    <section th:include="fragments.html :: navbar"></section>
+</header>
+<main>
+    <table class="table">
+        <thead class="thead-light">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Logo</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Code</th>
+            <th scope="col">Action</th>
+            <th scope="col">Location</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="organization,iter :  ${organizations}">
+            <th th:text="${iter.count}"></th>
+            <th>
+                <img th:src="@{${organization.logo}}" class="img-thumbnail" alt="logo" th:width="100px"/>
+            </th>
+            <th th:text="${organization.name}"></th>
+            <th th:text="${organization.email}"></th>
+            <th th:text="${organization.code}"></th>
+            <th class="icons">
+                <a th:href="@{/organization/detail/{id}/(id=${organization.id})}">👁</a>
+                <a href="#">🔐</a>
+                <a href="#">🔓</a>
+                <a th:href="@{/organization/delete/{id}/(id=${organization.id})}">🗑</a>
+            </th>
+        </tr>
+        </tbody>
+    </table>
+</main>
+<footer>
+    <section th:include="fragments.html :: js"></section>
+</footer>
+</body>
+</html>
