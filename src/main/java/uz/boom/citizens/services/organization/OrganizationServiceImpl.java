@@ -79,6 +79,14 @@ public class OrganizationServiceImpl extends AbstractService<OrganizationReposit
         return mapper.toDto(organization);
     }
 
+
+    public OrganizationDto update(Long id) {
+        Organization organization = repository.findById(id).orElseThrow(() -> {
+            throw new RuntimeException("Topilmadi");
+        });
+        return mapper.toDto(organization);
+    }
+
     @Override
     public Long totalCount(GenericCriteria criteria) {
         return null;
