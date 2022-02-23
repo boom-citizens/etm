@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragment.html :: header('Logout Page')"></head>
+<body class="myb">
+<section th:include="fragment.html :: navbar"></section>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-3">
+            <figure class="figure">
+                <form th:action="@{/auth/logout}" th:method="post">
+
+                    <h1>Are you sure?</h1>
+
+                    <a th:href="@{/}" class="btn btn-warning active">No</a>
+                    <button type="submit" class="btn btn-danger">Yes</button>
+                </form>
+            </figure>
+        </div>
+    </div>
+</div>
+
+<section th:include="fragment.html :: js-files"></section>
+</body>
+</html>
