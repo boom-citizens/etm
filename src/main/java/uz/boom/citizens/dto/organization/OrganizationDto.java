@@ -15,11 +15,11 @@ public class OrganizationDto extends GenericDto {
     private String email;
     private String code;
     private String location;
-    private AuthUser owner;
+    private Long owner;
 
 
     @Builder(builderMethodName = "childBuilder")
-    public OrganizationDto(Long id, String name, String logo, String email, String code, String location, AuthUser owner) {
+    public OrganizationDto(Long id, String name, String logo, String email, String code, String location, Long owner) {
         super(id);
         this.name = name;
         this.logo = logo;

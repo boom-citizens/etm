@@ -15,9 +15,9 @@ public class OrganizationUpdateDto extends GenericDto {
     private String email;
     private String code;
     private String location;
-    private AuthUser owner;
+    private Long owner;
 
-    public OrganizationUpdateDto(Long id, String name, MultipartFile logo, String email, String code, String location, AuthUser owner) {
+    public OrganizationUpdateDto(Long id, String name, MultipartFile logo, String email, String code, String location, Long owner) {
         super(id);
         this.name = name;
         this.logo = logo;

@@ -16,10 +16,10 @@ public class OrganizationCreateDto implements Dto {
     private String email;
     private String code;
     private String location;
-    private AuthUser owner;
+    private Long owner;
 
 
-    public OrganizationCreateDto(String name, MultipartFile logo, String email, String code, String location, AuthUser owner) {
+    public OrganizationCreateDto(String name, MultipartFile logo, String email, String code, String location, Long owner) {
         this.name = name;
         this.logo = logo;
         this.email = email;

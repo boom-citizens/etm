@@ -26,7 +26,6 @@ public class Organization extends Auditable {
 
     private String location;
 
-    @OneToOne
-    @JoinColumn(name = "owner", referencedColumnName = "id")
-    private AuthUser owner;
+
+    private Long owner;
 }
