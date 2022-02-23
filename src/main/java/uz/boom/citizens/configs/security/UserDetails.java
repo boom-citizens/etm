@@ -39,7 +39,7 @@ public class UserDetails implements org.springframework.security.core.userdetail
         this.active = user.isActive();
         this.blocked = user.isBlocked();
         this.role = user.getRole();
-        this.orgId = user.getOrgId();
+        this.orgId = user.getOrganization().getId();
     }
 
     @Override
