@@ -6,6 +6,7 @@ import uz.boom.citizens.dto.organization.OrganizationCreateDto;
 import uz.boom.citizens.dto.organization.OrganizationUpdateDto;
 import uz.boom.citizens.exceptions.ValidationException;
 import uz.boom.citizens.utils.BaseUtils;
+import uz.boom.citizens.utils.validators.AbstractValidator;
 
 @Component
 public class OrganizationValidator extends AbstractValidator<OrganizationCreateDto, OrganizationUpdateDto, Long> {

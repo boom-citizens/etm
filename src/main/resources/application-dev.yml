@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/spring_boot_projects?currentSchema=etm
+    url: jdbc:postgresql://localhost:5432/trello
     username: postgres
-    password: 1111
+    password: 123
   jpa:
     show-sql: true
     hibernate:

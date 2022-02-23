@@ -6,7 +6,6 @@ import javax.persistence.*;
 import java.time.Instant;
 
 @Entity
-@Table(name = "project", schema = "etm")
 public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
