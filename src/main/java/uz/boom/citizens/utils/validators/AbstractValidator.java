@@ -1,4 +1,4 @@
-package uz.boom.citizens.utils.validators.organization;
+package uz.boom.citizens.utils.validators;
 
 import uz.boom.citizens.exceptions.ValidationException;
 import uz.boom.citizens.utils.BaseUtils;

@@ -1,4 +1,4 @@
-package uz.boom.citizens.controller;
+package uz.boom.citizens.controller.organization;
 
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import uz.boom.citizens.controller.AbstractController;
 import uz.boom.citizens.criteria.GenericCriteria;
 import uz.boom.citizens.dto.organization.OrganizationCreateDto;
 import uz.boom.citizens.dto.organization.OrganizationUpdateDto;
@@ -19,9 +20,8 @@ import java.io.IOException;
 @RequestMapping("/organization/*")
 public class OrganizationController extends AbstractController<OrganizationService> {
 
-//kjh
     @Autowired
-    public OrganizationController(OrganizationService service) {
+    public OrganizationController(OrganizationService service)   {
         super(service);
     }
 
