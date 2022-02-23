@@ -1,9 +1,28 @@
-spring:
-  profiles:
-    active: prod
+remember:
+  me:
+    token:
+      key: '#$@#$WERWE%#$%#SDT#^$%^'
+      #days
+      expiry: 30
 
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/citizens?currentSchema=etm
+    username: postgres
+    password: 1111
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+    show-sql: true
   thymeleaf:
     cache: false
   servlet:
     multipart:
       max-file-size: 100MB
+
+server:
+  port: 9090
+
+
