@@ -50,7 +50,7 @@ public class ProjectController extends AbstractController<ProjectService>{
     @RequestMapping(value = "update/{id}/", method = RequestMethod.POST)
     public String update(@ModelAttribute ProjectUpdateDto dto) throws IOException {
         service.update(dto);
-        return "redirect:/";
+        return "redirect:/project/list/";
     }
 
     @RequestMapping(value = "delete/{id}/", method = RequestMethod.GET)
@@ -62,7 +62,7 @@ public class ProjectController extends AbstractController<ProjectService>{
     @RequestMapping(value = "delete/{id}/", method = RequestMethod.POST)
     public String delete(@PathVariable(name = "id") Long id) {
         service.delete(id);
-        return "redirect:/";
+        return "redirect:/project/list/";
     }
 
     @RequestMapping(value = "detail/{id}/", method = RequestMethod.GET)

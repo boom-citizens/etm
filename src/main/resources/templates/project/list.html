@@ -27,7 +27,7 @@
             <th th:text="${project.closed}"></th>
             <th class="icons">
                 <a th:href="@{/project/detail/{id}/(id=${project.id})}">👁</a>
-                <a href="#">🔐</a>
+                <a th:href="@{/project/update/{id}/(id=${project.id})}">🔄</a>
                 <a href="#">🔓</a>
                 <a th:href="@{/project/delete/{id}/(id=${project.id})}">🗑</a>
             </th>

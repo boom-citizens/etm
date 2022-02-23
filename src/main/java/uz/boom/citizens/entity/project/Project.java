@@ -20,7 +20,7 @@ public class Project extends Auditable {
     @JoinColumn(name = "organization_id")
     private Organization organization;
 
-    @Column(name = "closed")
+    @Column(name = "closed",columnDefinition="BOOLEAN DEFAULT false")
     private Boolean closed;
 /*
 

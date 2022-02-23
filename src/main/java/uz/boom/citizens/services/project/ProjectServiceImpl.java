@@ -19,6 +19,7 @@ import uz.boom.citizens.utils.validators.project.ProjectValidator;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Author : Qozoqboyev Ixtiyor
@@ -41,6 +42,7 @@ public class ProjectServiceImpl extends AbstractService<ProjectRepository, Proje
     public Long create(ProjectCreateDto createDto) throws IOException {
         ResourceDto resourceDto = fileStorageService.store(createDto.getTz());
         Project project = mapper.fromCreateDto(createDto);
+        project.setClosed(false);
         project.setTzPath("/uploads/" + resourceDto.getPath());
         repository.save(project);
         return project.getId();
@@ -54,13 +56,17 @@ public class ProjectServiceImpl extends AbstractService<ProjectRepository, Proje
 
     @Override
     public Void update(ProjectUpdateDto dto) throws IOException {
-        ResourceDto resourceDto = fileStorageService.store(dto.getTzFile());
-
         Project project = repository.findById(dto.getId()).orElseThrow(() -> {
             throw new RuntimeException("Topilmadi");
         });
-        mapper.fromUpdateDto(dto, project);
-        project.setTzPath("/uploads/" + resourceDto.getPath());
+        if (!dto.getName().equals(""))
+            project.setName(dto.getName());
+
+        if (dto.getTzFile().getSize()!=0) {
+            ResourceDto resourceDto = fileStorageService.store(dto.getTzFile());
+            project.setTzPath("/uploads/" + resourceDto.getPath());
+        }
+        project.setClosed(dto.getClosed());
         repository.save(project);
         return null;
     }
