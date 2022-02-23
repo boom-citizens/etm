@@ -5,7 +5,7 @@ import uz.boom.citizens.dto.project.ProjectCreateDto;
 import uz.boom.citizens.dto.project.ProjectUpdateDto;
 import uz.boom.citizens.exceptions.ValidationException;
 import uz.boom.citizens.utils.BaseUtils;
-import uz.boom.citizens.utils.validators.organization.AbstractValidator;
+import uz.boom.citizens.utils.validators.AbstractValidator;
 
 /**
  * Author : Qozoqboyev Ixtiyor

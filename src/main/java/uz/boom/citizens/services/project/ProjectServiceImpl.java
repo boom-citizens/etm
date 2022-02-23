@@ -2,13 +2,17 @@ package uz.boom.citizens.services.project;
 
 import org.springframework.stereotype.Service;
 import uz.boom.citizens.criteria.GenericCriteria;
+import uz.boom.citizens.dto.organization.OrganizationDto;
 import uz.boom.citizens.dto.project.ProjectCreateDto;
 import uz.boom.citizens.dto.project.ProjectDto;
 import uz.boom.citizens.dto.project.ProjectUpdateDto;
+import uz.boom.citizens.entity.organization.Organization;
 import uz.boom.citizens.entity.project.Project;
+import uz.boom.citizens.mapper.OrganizationMapper;
 import uz.boom.citizens.mapper.ProjectMapper;
 import uz.boom.citizens.reposiroty.ProjectRepository;
 import uz.boom.citizens.services.AbstractService;
+import uz.boom.citizens.services.organization.OrganizationServiceImpl;
 import uz.boom.citizens.utils.BaseUtils;
 import uz.boom.citizens.utils.validators.project.ProjectValidator;
 
@@ -23,14 +27,20 @@ import java.util.List;
 public class ProjectServiceImpl extends AbstractService<ProjectRepository, ProjectMapper, ProjectValidator>
         implements ProjectService {
 
-    public ProjectServiceImpl(ProjectRepository repository, ProjectMapper mapper, ProjectValidator validator, BaseUtils baseUtils) {
+    private final OrganizationServiceImpl organizationService;
+    private final OrganizationMapper organizationMapper;
+
+    public ProjectServiceImpl(ProjectRepository repository, ProjectMapper mapper, ProjectValidator validator, BaseUtils baseUtils, OrganizationServiceImpl organizationService, OrganizationMapper organizationMapper) {
         super(repository, mapper, validator, baseUtils);
+        this.organizationService = organizationService;
+        this.organizationMapper = organizationMapper;
     }
 
 
     @Override
     public Long create(ProjectCreateDto createDto) {
-        Project project=mapper.fromCreateDto(createDto);
+        Project project = mapper.fromCreateDto(createDto);
+        OrganizationDto organizationDto = organizationService.get(1L);
 
         repository.save(project);
         return project.getId();
@@ -54,10 +64,10 @@ public class ProjectServiceImpl extends AbstractService<ProjectRepository, Proje
 
     @Override
     public ProjectDto get(Long id) {
-        Project project=repository.findById((id)).orElseThrow(()->{
+        Project project = repository.findById((id)).orElseThrow(() -> {
             throw new RuntimeException("Topilmadi");
         });
-                return mapper.toDto(project);
+        return mapper.toDto(project);
     }
 
     @Override
