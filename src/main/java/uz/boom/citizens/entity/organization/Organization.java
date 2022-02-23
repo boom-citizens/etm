@@ -3,10 +3,9 @@ package uz.boom.citizens.entity.organization;
 import lombok.Getter;
 import lombok.Setter;
 import uz.boom.citizens.entity.Auditable;
+import uz.boom.citizens.entity.auth.AuthUser;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 
 @Getter
@@ -27,5 +26,7 @@ public class Organization extends Auditable {
 
     private String location;
 
-    private Long owner;
+    @OneToOne
+    @JoinColumn(name = "owner", referencedColumnName = "id")
+    private AuthUser owner;
 }

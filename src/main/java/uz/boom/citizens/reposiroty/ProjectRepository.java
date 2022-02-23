@@ -9,4 +9,5 @@ import uz.boom.citizens.entity.project.Project;
  * Project : library_boom
  */
 public interface ProjectRepository extends JpaRepository<Project,Long>,AbstractRepository {
+    Project findProjectById(Long id);
 }

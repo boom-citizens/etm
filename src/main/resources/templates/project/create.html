@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:include="fragments.html :: header('Project Create Page')">
+<head th:include="fragment.html :: header('Project Create Page')">
 </head>
 <body>
 <header>
-    <section th:include="fragments.html :: navbar"></section>
+    <section th:include="fragment.html :: navbar"></section>
 </header>
 <main>
     <div class="container">
@@ -20,7 +20,7 @@
 
                     <div class="form-group">
                         <label for="tz">Tz</label>
-                        <input type="text" class="form-control" id="tz" name="tz"/>
+                        <input type="file" class="form-control" id="tz" name="tz"/>
                     </div>
 
                     <button type="submit" class="btn btn-primary">➕ Save</button>
@@ -30,7 +30,7 @@
     </div>
 </main>
 <footer>
-    <section th:include="fragments.html :: js"></section>
+    <section th:include="fragment.html :: js-files"></section>
 </footer>
 </body>
 </html>

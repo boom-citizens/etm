@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import uz.boom.citizens.criteria.GenericCriteria;
 import uz.boom.citizens.dto.project.ProjectCreateDto;
 import uz.boom.citizens.dto.project.ProjectUpdateDto;
@@ -34,11 +35,10 @@ public class ProjectController extends AbstractController<ProjectService>{
         return "project/create";
     }
 
-    @SneakyThrows
     @RequestMapping(value = "create/", method = RequestMethod.POST)
-    public String create(@ModelAttribute ProjectCreateDto dto) {
+    public String create(@ModelAttribute ProjectCreateDto dto) throws IOException {
         service.create(dto);
-        return "redirect:/";
+        return "redirect:/project/list/";
     }
 
     @RequestMapping(value = "update/{id}/", method = RequestMethod.GET)
@@ -53,25 +53,25 @@ public class ProjectController extends AbstractController<ProjectService>{
         return "redirect:/";
     }
 
-    @RequestMapping(value = "delete/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "delete/{id}/", method = RequestMethod.GET)
     public String deletePage(Model model, @PathVariable(name = "id") Long id) {
         model.addAttribute("project", service.get(id));
         return "project/delete";
     }
 
-    @RequestMapping(value = "delete/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "delete/{id}/", method = RequestMethod.POST)
     public String delete(@PathVariable(name = "id") Long id) {
         service.delete(id);
         return "redirect:/";
     }
 
-    @RequestMapping(value = "detail/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "detail/{id}/", method = RequestMethod.GET)
     public String detailPage(Model model, @PathVariable(name = "id") Long id) {
         model.addAttribute("project", service.get(id));
         return "project/detail";
     }
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @RequestMapping(value = "list/", method = RequestMethod.GET)
     public String listPage(Model model) {
         model.addAttribute("projects", service.getAll(new GenericCriteria()));
         return "project/list";

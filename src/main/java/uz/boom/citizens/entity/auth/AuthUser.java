@@ -4,11 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 import uz.boom.citizens.entity.Auditable;
+import uz.boom.citizens.entity.organization.Organization;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -39,10 +37,16 @@ public class AuthUser extends Auditable {
     @ColumnDefault(value = "false")
     private boolean blocked;
 
+    @ManyToOne
+    @JoinColumn(name = "language", referencedColumnName = "id")
+    private Language language;
+
     @OneToOne
+    @JoinColumn(name = "role", referencedColumnName = "id")
     private AuthRole role;
 
-    @Column(name = "org_id")
-    private Long orgId;
+    @ManyToOne
+    @JoinColumn(name = "org_id", referencedColumnName = "id")
+    private Organization organization;
 
 }
