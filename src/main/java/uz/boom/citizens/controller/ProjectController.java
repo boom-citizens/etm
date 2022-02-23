@@ -9,49 +9,54 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import uz.boom.citizens.criteria.GenericCriteria;
-import uz.boom.citizens.dto.organization.OrganizationCreateDto;
-import uz.boom.citizens.dto.organization.OrganizationUpdateDto;
-import uz.boom.citizens.services.organization.OrganizationService;
+import uz.boom.citizens.dto.project.ProjectCreateDto;
+import uz.boom.citizens.dto.project.ProjectUpdateDto;
+import uz.boom.citizens.services.project.ProjectService;
 
 import java.io.IOException;
 
+/**
+ * Author : Qozoqboyev Ixtiyor
+ * Time : 17.02.2022 0:13
+ * Project : library_boom
+ */
 @Controller
-@RequestMapping("/organization/*")
-public class OrganizationController extends AbstractController<OrganizationService> {
+@RequestMapping("/project/*")
+public class ProjectController extends AbstractController<ProjectService>{
 
     @Autowired
-    public OrganizationController(OrganizationService service) {
+    public ProjectController(ProjectService service) {
         super(service);
     }
 
     @RequestMapping(value = "create/", method = RequestMethod.GET)
     public String createPage() {
-        return "organization/create";
+        return "project/create";
     }
 
     @SneakyThrows
     @RequestMapping(value = "create/", method = RequestMethod.POST)
-    public String create(@ModelAttribute OrganizationCreateDto dto) {
+    public String create(@ModelAttribute ProjectCreateDto dto) {
         service.create(dto);
         return "redirect:/";
     }
 
     @RequestMapping(value = "update/{id}/", method = RequestMethod.GET)
     public String updatePage(Model model, @PathVariable(name = "id") Long id) {
-        model.addAttribute("organization", service.get(id));
-        return "organization/update";
+        model.addAttribute("project", service.get(id));
+        return "project/update";
     }
 
     @RequestMapping(value = "update/{id}/", method = RequestMethod.POST)
-    public String update(@ModelAttribute OrganizationUpdateDto dto) throws IOException {
+    public String update(@ModelAttribute ProjectUpdateDto dto) throws IOException {
         service.update(dto);
         return "redirect:/";
     }
 
     @RequestMapping(value = "delete/{id}", method = RequestMethod.GET)
     public String deletePage(Model model, @PathVariable(name = "id") Long id) {
-        model.addAttribute("organization", service.get(id));
-        return "organization/delete";
+        model.addAttribute("project", service.get(id));
+        return "project/delete";
     }
 
     @RequestMapping(value = "delete/{id}", method = RequestMethod.POST)
@@ -62,13 +67,13 @@ public class OrganizationController extends AbstractController<OrganizationServi
 
     @RequestMapping(value = "detail/{id}", method = RequestMethod.GET)
     public String detailPage(Model model, @PathVariable(name = "id") Long id) {
-        model.addAttribute("organization", service.get(id));
-        return "organization/detail";
+        model.addAttribute("project", service.get(id));
+        return "project/detail";
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String listPage(Model model) {
-        model.addAttribute("organizations", service.getAll(new GenericCriteria()));
-        return "organization/list";
+        model.addAttribute("projects", service.getAll(new GenericCriteria()));
+        return "project/list";
     }
 }

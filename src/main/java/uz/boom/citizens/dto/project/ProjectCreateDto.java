@@ -3,7 +3,7 @@ package uz.boom.citizens.dto.project;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import uz.boom.citizens.dto.GenericDto;
+import uz.boom.citizens.dto.Dto;
 import uz.boom.citizens.entity.organization.Organization;
 
 /**
@@ -13,20 +13,16 @@ import uz.boom.citizens.entity.organization.Organization;
  */
 @Getter
 @Setter
-
-public class ProjectDto extends GenericDto {
+@Builder
+public class ProjectCreateDto implements Dto {
 
     private String name;
     private String tzPath;
     private Organization organization;
-    private Boolean closed;
 
-    @Builder(builderMethodName = "childBuilder")
-    public ProjectDto(Long id, String name, String tzPath, Organization organization, Boolean closed) {
-        super(id);
+    public ProjectCreateDto(String name, String tzPath, Organization organization) {
         this.name = name;
         this.tzPath = tzPath;
         this.organization = organization;
-        this.closed = closed;
     }
 }

@@ -1,5 +1,6 @@
 package uz.boom.citizens.entity.project;
 
+import uz.boom.citizens.entity.Auditable;
 import uz.boom.citizens.entity.organization.Organization;
 
 import javax.persistence.*;
@@ -7,12 +8,7 @@ import java.time.Instant;
 
 @Entity
 @Table(name = "project", schema = "etm")
-public class Project {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Long id;
-
+public class Project extends Auditable {
     @Lob
     @Column(name = "name")
     private String name;

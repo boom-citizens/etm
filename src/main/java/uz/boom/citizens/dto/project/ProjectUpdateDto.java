@@ -2,6 +2,7 @@ package uz.boom.citizens.dto.project;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import uz.boom.citizens.dto.GenericDto;
 import uz.boom.citizens.entity.organization.Organization;
@@ -13,8 +14,8 @@ import uz.boom.citizens.entity.organization.Organization;
  */
 @Getter
 @Setter
-
-public class ProjectDto extends GenericDto {
+@NoArgsConstructor
+public class ProjectUpdateDto extends GenericDto {
 
     private String name;
     private String tzPath;
@@ -22,7 +23,7 @@ public class ProjectDto extends GenericDto {
     private Boolean closed;
 
     @Builder(builderMethodName = "childBuilder")
-    public ProjectDto(Long id, String name, String tzPath, Organization organization, Boolean closed) {
+    public ProjectUpdateDto(Long id, String name, String tzPath, Organization organization, Boolean closed) {
         super(id);
         this.name = name;
         this.tzPath = tzPath;

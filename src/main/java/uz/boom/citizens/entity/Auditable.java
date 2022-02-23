@@ -17,6 +17,6 @@ public abstract class Auditable implements BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
-    private Long id;
+    protected Long id;
 
 }
