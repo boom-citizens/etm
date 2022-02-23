@@ -1,6 +1,5 @@
 package uz.boom.citizens.entity.project;
 
-import uz.boom.citizens.entity.Auditable;
 import uz.boom.citizens.entity.organization.Organization;
 
 import javax.persistence.*;

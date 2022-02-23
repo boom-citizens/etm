@@ -1,6 +1,7 @@
 package uz.boom.citizens.services.organization;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import uz.boom.citizens.criteria.GenericCriteria;
 import uz.boom.citizens.dto.file.ResourceDto;
@@ -8,8 +9,8 @@ import uz.boom.citizens.dto.organization.OrganizationCreateDto;
 import uz.boom.citizens.dto.organization.OrganizationDto;
 import uz.boom.citizens.dto.organization.OrganizationUpdateDto;
 import uz.boom.citizens.entity.organization.Organization;
-import uz.boom.citizens.mapper.OrganizationMapper;
-import uz.boom.citizens.reposiroty.OrganizationRepository;
+import uz.boom.citizens.mapper.organization.OrganizationMapper;
+import uz.boom.citizens.reposiroty.organization.OrganizationRepository;
 import uz.boom.citizens.services.AbstractService;
 import uz.boom.citizens.services.file.FileStorageService;
 import uz.boom.citizens.utils.BaseUtils;
@@ -25,7 +26,11 @@ public class OrganizationServiceImpl extends AbstractService<OrganizationReposit
     private final FileStorageService fileStorageService;
 
     @Autowired
-    protected OrganizationServiceImpl(OrganizationRepository repository, OrganizationMapper mapper, OrganizationValidator validator, BaseUtils baseUtils, FileStorageService fileStorageService) {
+    protected OrganizationServiceImpl(OrganizationRepository repository,
+                                      OrganizationMapper mapper,
+                                      OrganizationValidator validator,
+                                      BaseUtils baseUtils,
+                                      FileStorageService fileStorageService) {
         super(repository, mapper, validator, baseUtils);
         this.fileStorageService = fileStorageService;
     }
@@ -38,14 +43,6 @@ public class OrganizationServiceImpl extends AbstractService<OrganizationReposit
         repository.save(organization);
         return organization.getId();
     }
-
-//    public Long create(OrganizationCreateDto createDto, MultipartFile logo) throws IOException {
-//        ResourceDto resourceDto = fileStorageService.store(logo);
-//        Organization organization = mapper.fromCreateDto(createDto);
-//        organization.setLogo(resourceDto.getPath());
-//        repository.save(organization);
-//        return organization.getId();
-//    }
 
     @Override
     public Void delete(Long id) {
