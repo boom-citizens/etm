@@ -3,6 +3,7 @@ package uz.boom.citizens.dto.project;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 import uz.boom.citizens.dto.Dto;
 import uz.boom.citizens.entity.organization.Organization;
 
@@ -17,12 +18,12 @@ import uz.boom.citizens.entity.organization.Organization;
 public class ProjectCreateDto implements Dto {
 
     private String name;
-    private String tzPath;
+    private MultipartFile tz;
     private Organization organization;
 
-    public ProjectCreateDto(String name, String tzPath, Organization organization) {
+    public ProjectCreateDto(String name, MultipartFile tz, Organization organization) {
         this.name = name;
-        this.tzPath = tzPath;
+        this.tz = tz;
         this.organization = organization;
     }
 }

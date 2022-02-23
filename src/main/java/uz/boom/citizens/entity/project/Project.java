@@ -1,9 +1,9 @@
 package uz.boom.citizens.entity.project;
 
+import uz.boom.citizens.entity.Auditable;
 import uz.boom.citizens.entity.organization.Organization;
 
 import javax.persistence.*;
-import java.time.Instant;
 
 @Entity
 @Table(name = "project", schema = "etm")
@@ -22,10 +22,11 @@ public class Project extends Auditable {
 
     @Column(name = "closed")
     private Boolean closed;
+/*
 
     @Convert(disableConversion = true)
     @Column(name = "createdat")
-    private Instant createdat;
+    private LocalDateTime createdat;
 
     @Column(name = "createby", nullable = false)
     private Long createby;
@@ -36,6 +37,8 @@ public class Project extends Auditable {
 
     @Column(name = "updateby")
     private Long updateby;
+*/
+/*
 
     public Long getUpdateby() {
         return updateby;
@@ -61,13 +64,14 @@ public class Project extends Auditable {
         this.createby = createby;
     }
 
-    public Instant getCreatedat() {
+    public LocalDateTime getCreatedat() {
         return createdat;
     }
 
-    public void setCreatedat(Instant createdat) {
+    public void setCreatedat(LocalDateTime createdat) {
         this.createdat = createdat;
     }
+*/
 
     public Boolean getClosed() {
         return closed;

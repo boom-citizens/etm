@@ -19,4 +19,5 @@ public interface BaseMapper<E, D, CD, UD> extends Mapper {
 
     E fromUpdateDto(UD ud);
 
+
 }

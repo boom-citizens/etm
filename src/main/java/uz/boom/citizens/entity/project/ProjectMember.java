@@ -1,5 +1,7 @@
 package uz.boom.citizens.entity.project;
 
+import uz.boom.citizens.entity.auth.AuthUser;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,8 +15,9 @@ public class ProjectMember {
     @JoinColumn(name = "project_id")
     private Project project;
 
-    @Column(name = "user_id")
-    private Long userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private AuthUser authUser;
 
     @Column(name = "is_lead")
     private Boolean isLead;
@@ -27,12 +30,12 @@ public class ProjectMember {
         this.isLead = isLead;
     }
 
-    public Long getUserId() {
-        return userId;
+    public AuthUser getAuthUser() {
+        return authUser;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setAuthUser(AuthUser authUser) {
+        this.authUser = authUser;
     }
 
     public Project getProject() {

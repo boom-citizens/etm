@@ -1,10 +1,14 @@
 package uz.boom.citizens.mapper;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import org.springframework.stereotype.Component;
+import uz.boom.citizens.dto.organization.OrganizationUpdateDto;
 import uz.boom.citizens.dto.project.ProjectCreateDto;
 import uz.boom.citizens.dto.project.ProjectDto;
 import uz.boom.citizens.dto.project.ProjectUpdateDto;
+import uz.boom.citizens.entity.organization.Organization;
 import uz.boom.citizens.entity.project.Project;
 
 /**
@@ -25,4 +29,8 @@ public interface ProjectMapper extends BaseMapper<
 
     @Override
     Project fromUpdateDto(ProjectUpdateDto projectUpdateDto);
+
+    @Mapping(target ="tzPath", ignore = true)
+    Project fromUpdateDto(ProjectUpdateDto projectUpdateDto, @MappingTarget Project project);
+
 }
