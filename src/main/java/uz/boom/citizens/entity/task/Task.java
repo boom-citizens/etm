@@ -4,23 +4,24 @@ import lombok.Getter;
 import lombok.Setter;
 import uz.boom.citizens.entity.Auditable;
 import uz.boom.citizens.entity.columns.ProjectColumn;
+import uz.boom.citizens.entity.project.Project;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
 
 @Getter
 @Setter
 @Entity
+@Table(schema = "etm")
 public class Task extends Auditable {
 
 
-    private Long projectId;
+    @ManyToOne
+    @JoinColumn(name = "project_id", referencedColumnName = "id")
+    private Project projectId;
 
     @ManyToOne
+    @JoinColumn(name = "column_id", referencedColumnName = "id")
     private ProjectColumn columnId;
 
     @Column(nullable = false)
@@ -30,6 +31,9 @@ public class Task extends Auditable {
 
     private String level;
 
+    @Column(updatable = false, name = "added_time")
+    private LocalDate addedTime;
+
     private LocalDate deadline;
 
     private String priority;
@@ -37,8 +41,5 @@ public class Task extends Auditable {
     private Long parentId;
 
     private boolean completed;
-
-//    @ManyToMany()
-//    private List<Users> users;
 
 }

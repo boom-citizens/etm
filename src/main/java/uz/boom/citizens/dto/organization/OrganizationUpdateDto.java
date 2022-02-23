@@ -5,20 +5,25 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;
 import uz.boom.citizens.dto.GenericDto;
+import uz.boom.citizens.entity.auth.AuthUser;
 
 @Getter
 @Setter
 public class OrganizationUpdateDto extends GenericDto {
     private String name;
     private MultipartFile logo;
-    private String code;
     private String email;
+    private String code;
+    private String location;
+    private AuthUser owner;
 
-    public OrganizationUpdateDto(Long id, String name, MultipartFile logo, String code, String email) {
+    public OrganizationUpdateDto(Long id, String name, MultipartFile logo, String email, String code, String location, AuthUser owner) {
         super(id);
         this.name = name;
         this.logo = logo;
-        this.code = code;
         this.email = email;
+        this.code = code;
+        this.location = location;
+        this.owner = owner;
     }
 }
