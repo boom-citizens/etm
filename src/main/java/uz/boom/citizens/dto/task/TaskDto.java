@@ -4,14 +4,16 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import uz.boom.citizens.dto.GenericDto;
+import uz.boom.citizens.entity.columns.ProjectColumn;
+import uz.boom.citizens.entity.project.Project;
 
 import java.time.LocalDate;
 
 @Getter
 @Setter
 public class TaskDto extends GenericDto {
-    private Long projectId;
-    private Long columnId;
+    private Project projectId;
+    private ProjectColumn columnId;
     private String name;
     private String description;
     private String level;
@@ -22,7 +24,7 @@ public class TaskDto extends GenericDto {
     private boolean completed;
 
     @Builder(builderMethodName = "childBuilder")
-    public TaskDto(Long id, Long projectId, Long columnId, String name, String description, String level, LocalDate addedTime, LocalDate deadline, String priority, Long parentId, boolean completed) {
+    public TaskDto(Long id, Project projectId, ProjectColumn columnId, String name, String description, String level, LocalDate addedTime, LocalDate deadline, String priority, Long parentId, boolean completed) {
         super(id);
         this.projectId = projectId;
         this.columnId = columnId;

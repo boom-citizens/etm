@@ -1,10 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragment.html :: header('Task Create Page')">
 <body>
+<header>
+    <section th:include="fragment.html :: navbar"></section>
+</header>
 
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="col-10 mx-auto">
+                <form th:method="post" enctype="multipart/form-data">
+
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" name="name"/>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <input type="text" class="form-control" id="description" name="description"/>
+                    </div>
+
+                    <div class="dropdown">
+                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Level
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <li th:value="EASY" id="EASY">Easy</li>
+                            <li th:value="HARD" id="HARD">Hard</li>
+                        </div>
+                    </div>
+
+                    <label for="addedTime">Added date:</label>
+
+                    <input type="date" id="addedTime" name="addedTime"
+                           value="2022-02-23"
+                           min="2022-02-23" max="2022-10-23">
+
+
+                    <button type="submit" class="btn btn-primary">➕ Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+<footer>
+    <section th:include="fragment.html :: js-files"></section>
+</footer>
 </body>
 </html>

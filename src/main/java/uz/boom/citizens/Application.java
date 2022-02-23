@@ -10,7 +10,7 @@ import uz.boom.citizens.reposiroty.auth.AuthUserRepository;
 import java.util.Arrays;
 
 @SpringBootApplication
-public class Application /*implements CommandLineRunner*/ {
+public class Application /*implements CommandLineRunner */ {
 
     private final AuthUserRepository authUserRepository;
     private final PasswordEncoder passwordEncoder;
@@ -26,8 +26,7 @@ public class Application /*implements CommandLineRunner*/ {
 
     }
 
-
-//    @Override
+    //  @Override
     public void run(String... args) throws Exception {
 
         authUserRepository.deleteAll();
