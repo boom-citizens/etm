@@ -2,6 +2,7 @@ package uz.boom.citizens.entity.auth;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 import uz.boom.citizens.entity.Auditable;
 
 import javax.persistence.Column;
@@ -26,13 +27,16 @@ public class AuthUser extends Auditable {
     @Column(name = "profile_image")
     private String profileImage;
 
-    @Column(name = "is_super_user", nullable = false, columnDefinition = "boolean default false")
+    @Column(name = "is_super_user", nullable = false)
+    @ColumnDefault(value = "false")
     private boolean superUser;
 
-    @Column(name = "is_active", nullable = false, columnDefinition = "boolean default true")
+    @Column(name = "is_active", nullable = false)
+    @ColumnDefault(value = "true")
     private boolean active;
 
-    @Column(name = "is_blocked", nullable = false, columnDefinition = "boolean default false")
+    @Column(name = "is_blocked", nullable = false)
+    @ColumnDefault(value = "false")
     private boolean blocked;
 
     @OneToOne

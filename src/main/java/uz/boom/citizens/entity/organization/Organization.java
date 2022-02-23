@@ -4,14 +4,16 @@ import lombok.Getter;
 import lombok.Setter;
 import uz.boom.citizens.entity.Auditable;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 
 @Getter
 @Setter
 @Entity
+@Table(name = "organizations")
 public class Organization extends Auditable {
-
 
     @Column(nullable = false, length = 100)
     private String name;
