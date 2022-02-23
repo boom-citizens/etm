@@ -1,9 +1,14 @@
 package uz.boom.citizens.entity.project;
 
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.stereotype.Service;
 import uz.boom.citizens.entity.auth.AuthUser;
 
 import javax.persistence.*;
 
+@Getter
+@Setter
 @Entity
 public class ProjectMember {
     @Id
@@ -15,7 +20,7 @@ public class ProjectMember {
     @JoinColumn(name = "project_id")
     private Project project;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private AuthUser authUser;
 

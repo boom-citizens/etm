@@ -1,4 +1,4 @@
-package uz.boom.citizens.mapper;
+package uz.boom.citizens.mapper.auth;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -8,6 +8,7 @@ import uz.boom.citizens.dto.auth.AuthUserCreateDto;
 import uz.boom.citizens.dto.auth.AuthUserDto;
 import uz.boom.citizens.dto.auth.AuthUserUpdateDto;
 import uz.boom.citizens.entity.auth.AuthUser;
+import uz.boom.citizens.mapper.BaseMapper;
 
 import java.util.List;
 
