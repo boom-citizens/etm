@@ -20,6 +20,29 @@
                     </li>
                     <li th:text="'Closed : '+${project.closed}"></li>
                 </ol>
+                <h1>Project Members : </h1>
+                <table class="table">
+                    <thead class="thead-light">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Profile image</th>
+                        <th scope="col">IsActive</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="member,iter :  ${project_members}">
+                        <th th:text="${iter.count}"></th>
+                        <th th:text="${member.username}"></th>
+                        <th th:text="${member.email}"></th>
+                        <th>
+                            <img th:src="@{${member.profileImage}}" class="img-thumbnail" alt="logo" th:width="100px"/>
+                        </th>
+                        <th th:text="${member.active}"></th>
+                    </tr>
+                    </tbody>
+                </table>
 
             </div>
         </div>

@@ -1,4 +1,4 @@
-package uz.boom.citizens.mapper;
+package uz.boom.citizens.mapper.task;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
@@ -7,6 +7,7 @@ import uz.boom.citizens.dto.task.TaskCreateDto;
 import uz.boom.citizens.dto.task.TaskDto;
 import uz.boom.citizens.dto.task.TaskUpdateDto;
 import uz.boom.citizens.entity.task.Task;
+import uz.boom.citizens.mapper.BaseMapper;
 
 import java.util.List;
 

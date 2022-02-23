@@ -1,16 +1,20 @@
 package uz.boom.citizens.services.project;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 import uz.boom.citizens.criteria.GenericCriteria;
+import uz.boom.citizens.dto.auth.AuthUserDto;
 import uz.boom.citizens.dto.file.ResourceDto;
 import uz.boom.citizens.dto.project.ProjectCreateDto;
 import uz.boom.citizens.dto.project.ProjectDto;
 import uz.boom.citizens.dto.project.ProjectUpdateDto;
+import uz.boom.citizens.entity.auth.AuthUser;
 import uz.boom.citizens.entity.project.Project;
-import uz.boom.citizens.mapper.ProjectMapper;
+import uz.boom.citizens.entity.project.ProjectMember;
+import uz.boom.citizens.mapper.project.ProjectMapper;
 import uz.boom.citizens.mapper.organization.OrganizationMapper;
-import uz.boom.citizens.reposiroty.ProjectRepository;
+import uz.boom.citizens.reposiroty.project.ProjectMemberRepository;
+import uz.boom.citizens.reposiroty.project.ProjectRepository;
+import uz.boom.citizens.reposiroty.auth.AuthUserRepository;
 import uz.boom.citizens.services.AbstractService;
 import uz.boom.citizens.services.file.FileStorageService;
 import uz.boom.citizens.services.organization.OrganizationServiceImpl;
@@ -19,7 +23,6 @@ import uz.boom.citizens.utils.validators.project.ProjectValidator;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Author : Qozoqboyev Ixtiyor
@@ -32,7 +35,7 @@ public class ProjectServiceImpl extends AbstractService<ProjectRepository, Proje
 
     private final FileStorageService fileStorageService;
 
-    public ProjectServiceImpl(ProjectRepository repository, ProjectMapper mapper, ProjectValidator validator, BaseUtils baseUtils, OrganizationServiceImpl organizationService, OrganizationMapper organizationMapper, FileStorageService fileStorageService) {
+    public ProjectServiceImpl(ProjectRepository repository, ProjectMapper mapper, ProjectValidator validator, BaseUtils baseUtils, OrganizationServiceImpl organizationService, OrganizationMapper organizationMapper, FileStorageService fileStorageService, AuthUserRepository authUserRepository, ProjectMemberRepository projectMemberRepository) {
         super(repository, mapper, validator, baseUtils);
         this.fileStorageService = fileStorageService;
     }
@@ -83,6 +86,7 @@ public class ProjectServiceImpl extends AbstractService<ProjectRepository, Proje
         });
         return mapper.toDto(project);
     }
+
 
     @Override
     public Long totalCount(GenericCriteria criteria) {
