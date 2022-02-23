@@ -8,7 +8,7 @@ import uz.boom.citizens.dto.project.ProjectDto;
 import uz.boom.citizens.dto.project.ProjectUpdateDto;
 import uz.boom.citizens.entity.organization.Organization;
 import uz.boom.citizens.entity.project.Project;
-import uz.boom.citizens.mapper.OrganizationMapper;
+import uz.boom.citizens.mapper.organization.OrganizationMapper;
 import uz.boom.citizens.mapper.ProjectMapper;
 import uz.boom.citizens.reposiroty.ProjectRepository;
 import uz.boom.citizens.services.AbstractService;
