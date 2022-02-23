@@ -32,5 +32,11 @@ public class ColumnController extends AbstractController<ColumnService> {
         return "redirect:/";
     }
 
+    @RequestMapping(value = "create",method = RequestMethod.POST)
+    public String test(@ModelAttribute ColumnCreateDto dto) throws IOException {
+        service.create(dto);
+        return "redirect:/";
+    }
+
 
 }

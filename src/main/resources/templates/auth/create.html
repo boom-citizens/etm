@@ -35,6 +35,19 @@
                     <span style="color: red" th:errors="*{profileImage}"></span>
                 </div>
 
+                <div class="dropdown">
+                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="role"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Role
+                    </a>
+
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <li th:value="ADMIN" id="ADMIN">Admin</li>
+                        <li th:value="MANAGER" id="MANAGER">Manager</li>
+                        <li th:value="EMPLOYEE" id="EMPLOYEE">Employee</li>
+                    </div>
+                </div>
+
                 <button type="submit" class="btn btn-primary">Create</button>
             </form>
         </div>

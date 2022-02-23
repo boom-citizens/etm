@@ -82,6 +82,8 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
                                 .alwaysRemember(false)
                                 .key(rememberMeTokenKey)
                                 .rememberMeParameter("remember-me"))
+                .userDetailsService(applicationUserDetailsService)
+
                 .logout(httpSecurityLogoutConfigurer ->
                         httpSecurityLogoutConfigurer
                                 .logoutUrl("/auth/logout")

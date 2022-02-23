@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import uz.boom.citizens.controller.AbstractController;
 import uz.boom.citizens.dto.auth.AuthUserCreateDto;
+import uz.boom.citizens.entity.auth.AuthRole;
 import uz.boom.citizens.services.auth.AuthUserService;
 
 import javax.validation.Valid;
@@ -40,7 +41,7 @@ public class AuthController extends AbstractController<AuthUserService> {
     }
 
     @RequestMapping(value = "create", method = RequestMethod.POST)
-    public String create(@Valid @ModelAttribute(name = "dto") AuthUserCreateDto dto,
+    public String create(@Valid @ModelAttribute(name = "dto") AuthUserCreateDto dto, String role,
                          BindingResult bindingResult) throws IOException {
 
         if (bindingResult.hasErrors()) {
