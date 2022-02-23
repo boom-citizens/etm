@@ -16,5 +16,4 @@ public interface OrganizationService extends GenericCrudService<
         Long> {
 
 
-
 }

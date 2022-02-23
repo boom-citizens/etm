@@ -3,7 +3,6 @@ package uz.boom.citizens.entity.project;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "project_member", schema = "etm")
 public class ProjectMember {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

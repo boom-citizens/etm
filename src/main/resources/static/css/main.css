@@ -1,3 +1,5 @@
-.icons{
-    font-size: 30px;
+.wrapper {
+    display: grid;
+    background: lightgray;
+    grid-auto-columns: fit-content(300px);
 }

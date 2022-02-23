@@ -3,7 +3,7 @@ package uz.boom.citizens.services;
 import uz.boom.citizens.mapper.Mapper;
 import uz.boom.citizens.reposiroty.AbstractRepository;
 import uz.boom.citizens.utils.BaseUtils;
-import uz.boom.citizens.utils.validators.organization.Validator;
+import uz.boom.citizens.utils.validators.Validator;
 
 /**
  * @param <R> repository
