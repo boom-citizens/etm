@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 import uz.boom.citizens.dto.task.TaskCreateDto;
 import uz.boom.citizens.dto.task.TaskDto;
 import uz.boom.citizens.dto.task.TaskUpdateDto;
-import uz.boom.citizens.entity.organization.Organization;
 import uz.boom.citizens.entity.task.Task;
 
 import java.util.List;
@@ -15,16 +14,16 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface TaskMapper extends BaseMapper<Task, TaskDto, TaskCreateDto, TaskUpdateDto> {
     @Override
-    TaskDto toDto(Task task) ;
+    TaskDto toDto(Task task);
 
     @Override
-    List<TaskDto> toDto(List<Task> e) ;
+    List<TaskDto> toDto(List<Task> e);
 
     @Override
-    Task fromCreateDto(TaskCreateDto taskCreateDto) ;
+    Task fromCreateDto(TaskCreateDto taskCreateDto);
 
     @Override
-    Task fromUpdateDto(TaskUpdateDto taskUpdateDto) ;
+    Task fromUpdateDto(TaskUpdateDto taskUpdateDto);
 
-    Task fromUpdateDto(TaskUpdateDto taskUpdateDto, @MappingTarget Task task) ;
+    Task fromUpdateDto(TaskUpdateDto taskUpdateDto, @MappingTarget Task task);
 }

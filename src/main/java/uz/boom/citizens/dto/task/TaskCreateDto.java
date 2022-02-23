@@ -16,6 +16,7 @@ public class TaskCreateDto implements Dto {
     private String name;
     private String description;
     private String level;
+    private LocalDate addedTime;
     private LocalDate deadline;
     private String priority;
 }
