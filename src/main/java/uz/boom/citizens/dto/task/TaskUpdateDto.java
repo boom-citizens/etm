@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import uz.boom.citizens.dto.GenericDto;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -12,10 +12,10 @@ public class TaskUpdateDto extends GenericDto {
     private String name;
     private String description;
     private String level;
-    private LocalDate deadline;
+    private Date deadline;
     private String priority;
 
-    public TaskUpdateDto(Long id, String name, String description, String level, LocalDate deadline, String priority) {
+    public TaskUpdateDto(Long id, String name, String description, String level, Date deadline, String priority) {
         super(id);
         this.name = name;
         this.description = description;

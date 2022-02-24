@@ -7,7 +7,7 @@ import uz.boom.citizens.entity.columns.ProjectColumn;
 import uz.boom.citizens.entity.project.Project;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -31,10 +31,7 @@ public class Task extends Auditable {
 
     private String level;
 
-    @Column(updatable = false, name = "added_time")
-    private LocalDate addedTime;
-
-    private LocalDate deadline;
+    private Date deadline;
 
     private String priority;
 

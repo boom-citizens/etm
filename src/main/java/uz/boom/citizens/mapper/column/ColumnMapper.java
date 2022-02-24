@@ -21,11 +21,11 @@ public interface ColumnMapper extends BaseMapper<
         ColumnUpdateDto> {
 
     @Override
-    @Mapping(target = "icon", ignore = true)
+
     ColumnDto toDto(ProjectColumn projectColumn);
 
     @Override
-    @Mapping(target = "icon", ignore = true)
+
     List<ColumnDto> toDto(List<ProjectColumn> e);
 
     @Override

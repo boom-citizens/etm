@@ -1,11 +1,11 @@
 package uz.boom.citizens.controller.task;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 import uz.boom.citizens.controller.AbstractController;
 import uz.boom.citizens.criteria.GenericCriteria;
 import uz.boom.citizens.dto.organization.OrganizationUpdateDto;
@@ -14,13 +14,24 @@ import uz.boom.citizens.dto.task.TaskUpdateDto;
 import uz.boom.citizens.services.task.TaskService;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Controller
 @RequestMapping("/task/*")
 public class TaskController extends AbstractController<TaskService> {
+
+    @Autowired
     public TaskController(TaskService service) {
         super(service);
     }
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
+    }
+
 
     @RequestMapping(value = "add/", method = RequestMethod.GET)
     private String addTaskPage() {
@@ -30,7 +41,7 @@ public class TaskController extends AbstractController<TaskService> {
     @RequestMapping(value = "add/", method = RequestMethod.POST)
     private String add(@ModelAttribute TaskCreateDto createDto) throws IOException {
         service.create(createDto);
-        return "redirect:";
+        return "redirect:/task/list";
     }
 
     @RequestMapping(value = "update/{id}/", method = RequestMethod.GET)
@@ -65,7 +76,7 @@ public class TaskController extends AbstractController<TaskService> {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String listPage(Model model) {
-        model.addAttribute("task", service.getAll(new GenericCriteria()));
+        model.addAttribute("tasks", service.getAll(new GenericCriteria()));
         return "task/list";
     }
 
