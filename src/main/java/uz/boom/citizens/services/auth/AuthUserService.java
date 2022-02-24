@@ -57,7 +57,7 @@ public class AuthUserService extends AbstractService<AuthUserRepository, AuthUse
         Long userId = repository.save(user).getId();
 
         String permissions = objectMapper.writeValueAsString(dto.getPermissions());
-        roleService.addPermissions(userId, dto.getRole(), permissions);
+        roleService.addPermissions(userId, dto.getRole(), permissions, dto.getLanguage());
 
         return userId;
     }

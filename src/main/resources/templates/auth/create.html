@@ -35,18 +35,31 @@
                     <span style="color: red" th:errors="*{profileImage}"></span>
                 </div>
 
-                <label for="role">Choose role:</label>
-                <select id="role" name="role">
-                    <option value="ADMIN">ADMIN</option>
-                    <option value="MANAGER">MANAGER</option>
-                    <option value="EMPLOYEE">EMPLOYEE</option>
-                </select>
+                <div class="form-group">
+                    <label for="role">Choose role:</label>
+                    <select id="role" name="role">
+                        <option value="ADMIN">ADMIN</option>
+                        <option value="MANAGER">MANAGER</option>
+                        <option value="EMPLOYEE">EMPLOYEE</option>
+                    </select>
+                </div>
 
-                <ul class="form-check" th:each="permission : ${permissions}">
-                    <input class="form-check-input" type="checkbox" name="permissions"
-                           th:value="${permission.id}"
-                           aria-label="..." th:text="${permission.code}">
-                </ul>
+                <div class="form-group">
+                    <label for="language">Choose language:</label>
+                    <select id="language" name="language" th:each="language : ${languages}">
+                        <option th:value="${language.id}" th:text="${language.code}"></option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="permissions">Permissions:</label>
+                    <ul class="form-check" th:each="permission : ${permissions}">
+                        <input class="form-check-input" type="checkbox" name="permissions"
+                               id="permissions" th:value="${permission.id}"
+                               aria-label="..." th:text="${permission.code}">
+                    </ul>
+                </div>
+
 
                 <button type="submit" class="btn btn-primary">Create</button>
             </form>

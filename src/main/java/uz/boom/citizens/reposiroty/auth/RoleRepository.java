@@ -11,9 +11,10 @@ public interface RoleRepository extends JpaRepository<AuthRole, Long> {
 
     @Transactional
     @Modifying(clearAutomatically = true)
-    @Query(value = "call add_permissions(:user_id, :role, :permissions)",
+    @Query(value = "call add_permissions(:user_id, :role, :permissions, :language_id)",
             nativeQuery = true)
     void addPermissions(@Param("user_id") Long userId,
                         @Param("role") String role,
-                        @Param("permissions") String permissions);
+                        @Param("permissions") String permissions,
+                        @Param("language_id") Long languageId);
 }

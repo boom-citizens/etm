@@ -23,24 +23,29 @@ public interface AuthUserMapper extends BaseMapper<
     @Override
     @Mapping(target = "profileImage", ignore = true)
     @Mapping(target = "role", ignore = true)
+    @Mapping(target = "language", ignore = true)
     AuthUser fromCreateDto(AuthUserCreateDto dto);
 
     @Override
     @Mapping(target = "profileImage", ignore = true)
     @Mapping(target = "role", ignore = true)
+    @Mapping(target = "language", ignore = true)
     AuthUser fromUpdateDto(AuthUserUpdateDto dto);
 
     @Override
     @Mapping(target = "profileImage", ignore = true)
     @Mapping(target = "role", ignore = true)
+    @Mapping(target = "language", ignore = true)
     AuthUserDto toDto(AuthUser authUser);
 
     @Override
     @Mapping(target = "profileImage", ignore = true)
     @Mapping(target = "role", ignore = true)
+    @Mapping(target = "language", ignore = true)
     List<AuthUserDto> toDto(List<AuthUser> e);
 
     @Mapping(target = "profileImage", ignore = true)
     @Mapping(target = "role", ignore = true)
+    @Mapping(target = "language", ignore = true)
     AuthUser fromUpdateDto(AuthUserUpdateDto dto, @MappingTarget AuthUser authUser);
 }

@@ -20,7 +20,7 @@ public class RoleService {
         return repository.save(role).getId();
     }
 
-    public void addPermissions(Long userId, String role, String permissions) {
-        repository.addPermissions(userId, role, permissions);
+    public void addPermissions(Long userId, String role, String permissions, Long languageId) {
+        repository.addPermissions(userId, role, permissions, languageId);
     }
 }
