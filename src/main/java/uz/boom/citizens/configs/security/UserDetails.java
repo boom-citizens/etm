@@ -7,6 +7,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import uz.boom.citizens.entity.auth.AuthPermission;
 import uz.boom.citizens.entity.auth.AuthRole;
 import uz.boom.citizens.entity.auth.AuthUser;
+import uz.boom.citizens.entity.organization.Organization;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -27,7 +28,7 @@ public class UserDetails implements org.springframework.security.core.userdetail
     private boolean active;
     private boolean blocked;
     private AuthRole role;
-    private Long orgId;
+    private Organization organization;
 
     public UserDetails(AuthUser user) {
         this.id = user.getId();
@@ -39,7 +40,7 @@ public class UserDetails implements org.springframework.security.core.userdetail
         this.active = user.isActive();
         this.blocked = user.isBlocked();
         this.role = user.getRole();
-        this.orgId = user.getOrganization().getId();
+        this.organization = user.getOrganization();
     }
 
     @Override

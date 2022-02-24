@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import uz.boom.citizens.dto.file.ResourceDto;
+import uz.boom.citizens.mapper.file.ResourceMapper;
+import uz.boom.citizens.reposiroty.file.ResourceRepository;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
@@ -22,8 +24,12 @@ public class FileStorageService {
 
     private final String FILE_UPLOAD_PATH = "/upload/etm/organization/logos/";
     private final Path rootLocation;
+    private final ResourceRepository repository;
+    private final ResourceMapper mapper;
 
-    public FileStorageService() {
+    public FileStorageService(ResourceRepository repository, ResourceMapper mapper) {
+        this.repository = repository;
+        this.mapper = mapper;
         this.rootLocation = Paths.get(FILE_UPLOAD_PATH);
     }
 
@@ -56,13 +62,16 @@ public class FileStorageService {
         Files.copy(file.getInputStream(), Paths.get(FILE_UPLOAD_PATH, generatedName), StandardCopyOption.REPLACE_EXISTING);
         String path = generatedName;
 
-        return ResourceDto.builder().originalName(originalFilename)
+        ResourceDto dto = ResourceDto.builder().originalName(originalFilename)
                 .size(size)
                 .contentType(contentType)
                 .generatedName(generatedName)
                 .path(path)
                 .build();
 
+        repository.save(mapper.fromDto(dto));
+
+        return dto;
     }
 
 

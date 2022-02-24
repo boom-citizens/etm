@@ -3,13 +3,13 @@ package uz.boom.citizens.entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.Generated;
-import org.hibernate.annotations.GenerationTime;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.time.Instant;
 import java.time.LocalDateTime;
 
 @Getter
@@ -24,9 +24,12 @@ public abstract class Auditable implements BaseEntity {
     @Column(name = "id", unique = true, nullable = false)
     protected Long id;
 
-    @Column(name = "created_at", updatable = false)
-    @ColumnDefault(value = "CURRENT_TIMESTAMP")
-    @Generated(GenerationTime.INSERT)
+    //    @Column(name = "created_at", updatable = false)
+//    @ColumnDefault(value = "CURRENT_TIMESTAMP")
+//    @Generated(GenerationTime.INSERT)
+    @CreatedDate
+    @CreationTimestamp
+
     private LocalDateTime createdAt;
 
     @Column(name = "created_by")
@@ -35,6 +38,8 @@ public abstract class Auditable implements BaseEntity {
 
     @Convert(disableConversion = true)
     @Column(name = "updated_at")
+    @LastModifiedDate
+    @UpdateTimestamp
     private LocalDateTime updatedAt;
 
     @Column(name = "updated_by")

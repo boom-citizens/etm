@@ -1,6 +1,7 @@
 package uz.boom.citizens.entity.auth;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -13,8 +14,14 @@ import java.util.List;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @Entity
 public class AuthRole {
+
+    public AuthRole(String code, String name) {
+        this.code = code;
+        this.name = name;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,10 +34,8 @@ public class AuthRole {
     private String name;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "auth_user_permission",
-            joinColumns = @JoinColumn(name = "role_id"),
-            inverseJoinColumns = @JoinColumn(name = "permission_id")
-    )
+    @JoinTable(name = "auth_user_permission", joinColumns = @JoinColumn(name = "role_id"), inverseJoinColumns = @JoinColumn(name = "permission_id"))
     private List<AuthPermission> permissions = new ArrayList<>();
+
+
 }

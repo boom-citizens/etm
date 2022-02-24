@@ -35,23 +35,17 @@
                     <span style="color: red" th:errors="*{profileImage}"></span>
                 </div>
 
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="ADMIN" value="ADMIN">
-                    <label class="form-check-label" for="ADMIN">ADMIN</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="MANAGER" value="MANAGER">
-                    <label class="form-check-label" for="MANAGER">MANAGER</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="EMPLOYEE"
-                           value="EMPLOYEE">
-                    <label class="form-check-label" for="EMPLOYEE">EMPLOYEE</label>
-                </div>
+                <label for="role">Choose role:</label>
+                <select id="role" name="role">
+                    <option value="ADMIN">ADMIN</option>
+                    <option value="MANAGER">MANAGER</option>
+                    <option value="EMPLOYEE">EMPLOYEE</option>
+                </select>
 
                 <ul class="form-check" th:each="permission : ${permissions}">
-                    <input class="form-check-input" type="checkbox" th:text="${permission.getCode()}"
-                           aria-label="...">
+                    <input class="form-check-input" type="checkbox" name="permissions"
+                           th:value="${permission.id}"
+                           aria-label="..." th:text="${permission.code}">
                 </ul>
 
                 <button type="submit" class="btn btn-primary">Create</button>

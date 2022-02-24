@@ -1,6 +1,7 @@
 package uz.boom.citizens.services.auth;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -9,6 +10,7 @@ import uz.boom.citizens.dto.auth.AuthUserCreateDto;
 import uz.boom.citizens.dto.auth.AuthUserDto;
 import uz.boom.citizens.dto.auth.AuthUserUpdateDto;
 import uz.boom.citizens.dto.file.ResourceDto;
+import uz.boom.citizens.entity.auth.AuthRole;
 import uz.boom.citizens.entity.auth.AuthUser;
 import uz.boom.citizens.mapper.auth.AuthUserMapper;
 import uz.boom.citizens.reposiroty.auth.AuthUserRepository;
@@ -29,12 +31,17 @@ public class AuthUserService extends AbstractService<AuthUserRepository, AuthUse
 
     private final FileStorageService fileStorageService;
     private final PasswordEncoder passwordEncoder;
+    private final RoleService roleService;
+    protected final ObjectMapper objectMapper;
+
 
     @Autowired
-    protected AuthUserService(AuthUserRepository repository, AuthUserMapper mapper, AuthUserValidator validator, BaseUtils baseUtils, FileStorageService fileStorageService, PasswordEncoder passwordEncoder) {
+    protected AuthUserService(AuthUserRepository repository, AuthUserMapper mapper, AuthUserValidator validator, BaseUtils baseUtils, FileStorageService fileStorageService, PasswordEncoder passwordEncoder, RoleService roleService, ObjectMapper objectMapper) {
         super(repository, mapper, validator, baseUtils);
         this.fileStorageService = fileStorageService;
         this.passwordEncoder = passwordEncoder;
+        this.roleService = roleService;
+        this.objectMapper = objectMapper;
     }
 
     @Override
@@ -43,7 +50,13 @@ public class AuthUserService extends AbstractService<AuthUserRepository, AuthUse
         dto.setPassword(passwordEncoder.encode(dto.getPassword()));
         AuthUser user = mapper.fromCreateDto(dto);
         user.setProfileImage("/uploads/" + resourceDto.getPath());
-        return repository.save(user).getId();
+        Long userId = repository.save(user).getId();
+
+        Long roleId = roleService.create(new AuthRole(dto.getRole(), dto.getRole()));
+        String permissions = objectMapper.writeValueAsString(dto.getPermissions());
+        roleService.addPermissions(roleId, permissions);
+
+        return userId;
     }
 
     @Override

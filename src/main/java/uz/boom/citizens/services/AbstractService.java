@@ -1,5 +1,6 @@
 package uz.boom.citizens.services;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import uz.boom.citizens.mapper.Mapper;
 import uz.boom.citizens.reposiroty.AbstractRepository;
 import uz.boom.citizens.utils.BaseUtils;
@@ -18,6 +19,7 @@ public abstract class AbstractService<
     protected final M mapper;
     protected final V validator;
     protected final BaseUtils baseUtils;
+
 
     protected AbstractService(R repository, M mapper, V validator, BaseUtils baseUtils) {
         this.repository = repository;
