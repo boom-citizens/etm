@@ -11,11 +11,13 @@ import uz.boom.citizens.controller.AbstractController;
 import uz.boom.citizens.criteria.GenericCriteria;
 import uz.boom.citizens.dto.project.ProjectCreateDto;
 import uz.boom.citizens.dto.project.ProjectUpdateDto;
+import uz.boom.citizens.entity.auth.AuthPermission;
 import uz.boom.citizens.services.project.ProjectMemberServiceImpl;
 import uz.boom.citizens.services.project.ProjectService;
 import uz.boom.citizens.services.project.ProjectServiceImpl;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Author : Qozoqboyev Ixtiyor
@@ -80,5 +82,16 @@ public class ProjectController extends AbstractController<ProjectService> {
     public String listPage(Model model) {
         model.addAttribute("projects", service.getAll(new GenericCriteria()));
         return "project/list";
+    }
+
+    @RequestMapping(value = "add_member/{id}/", method = RequestMethod.GET)
+    public String addMemberPage(Model model,@PathVariable Long id) {
+        model.addAttribute("users", projectMemberService.getUsers(id));
+        return "project/add_member";
+    }
+    @RequestMapping(value = "add_member/{id}/", method = RequestMethod.POST)
+    public String addMember(@PathVariable Long id,@ModelAttribute(name = "users") List<Long> idList) {
+        projectMemberService.addUser(id,idList);
+        return "redirect:/project/list";
     }
 }

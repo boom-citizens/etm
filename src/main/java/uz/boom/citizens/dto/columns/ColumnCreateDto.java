@@ -17,5 +17,4 @@ public class  ColumnCreateDto implements Dto {
     private Project project_id;
     private int position;
     private MultipartFile icon;
-
 }

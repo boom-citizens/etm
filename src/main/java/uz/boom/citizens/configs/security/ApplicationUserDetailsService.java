@@ -35,5 +35,4 @@ public class ApplicationUserDetailsService implements UserDetailsService {
 //                .accountLocked(user.isBlocked())
 //                .build();
     }
-
 }

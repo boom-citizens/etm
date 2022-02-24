@@ -81,6 +81,7 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
                                 .tokenValiditySeconds(rememberMeTokenExpiryInSeconds)
                                 .alwaysRemember(false)
                                 .key(rememberMeTokenKey)
+                                .userDetailsService(applicationUserDetailsService)
                                 .rememberMeParameter("remember-me"))
                 .userDetailsService(applicationUserDetailsService)
 

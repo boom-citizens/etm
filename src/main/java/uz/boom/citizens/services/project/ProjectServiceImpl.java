@@ -1,6 +1,8 @@
 package uz.boom.citizens.services.project;
 
 import org.springframework.stereotype.Service;
+import uz.boom.citizens.configs.security.SessionUser;
+import uz.boom.citizens.configs.security.UserDetails;
 import uz.boom.citizens.criteria.GenericCriteria;
 import uz.boom.citizens.dto.auth.AuthUserDto;
 import uz.boom.citizens.dto.file.ResourceDto;
@@ -76,7 +78,9 @@ public class ProjectServiceImpl extends AbstractService<ProjectRepository, Proje
 
     @Override
     public List<ProjectDto> getAll(GenericCriteria criteria) {
-        return mapper.toDto(repository.findAll());
+        UserDetails session = SessionUser.session();
+        Long orgId = session.getOrganization().getId();
+        return mapper.toDto(repository.findAllByOrganization_Id(orgId));
     }
 
     @Override

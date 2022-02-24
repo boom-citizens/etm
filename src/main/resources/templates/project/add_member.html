@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragment.html :: header('Add member Page')">
+</head>
+<body>
+<header>
+    <section th:include="fragment.html :: navbar"></section>
+</header>
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="col-10 mx-auto">
+                <form th:method="post" enctype="multipart/form-data">
+
+                    <label for="users">Users : </label>
+                    <ul class="form-check" id="users" th:each="user : ${users}" th:name="users">
+                        <input class="form-check-input" type="checkbox" th:value="user.id" th:text="${user.username}"
+                               aria-label="...">
+                    </ul>
+
+                    <button type="submit" class="btn btn-primary">➕ Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+<footer>
+    <section th:include="fragment.html :: js-files"></section>
+</footer>
+</body>
+</html>
