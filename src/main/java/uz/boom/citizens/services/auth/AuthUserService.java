@@ -86,4 +86,8 @@ public class AuthUserService extends AbstractService<AuthUserRepository, AuthUse
     public Long totalCount(GenericCriteria criteria) {
         return null;
     }
+
+    public void changePassword(Long sessionId, String newPassword) {
+        repository.changePassword(sessionId, newPassword);
+    }
 }

@@ -6,6 +6,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import uz.boom.citizens.configs.security.SessionUser;
 import uz.boom.citizens.controller.AbstractController;
 import uz.boom.citizens.dto.auth.AuthUserCreateDto;
 import uz.boom.citizens.services.auth.AuthUserService;
@@ -39,7 +40,7 @@ public class AuthController extends AbstractController<AuthUserService> {
     }
 
     @RequestMapping(value = "create", method = RequestMethod.GET)
-    public String craetePage(Model model) {
+    public String createPage(Model model) {
         AuthUserCreateDto dto = new AuthUserCreateDto();
         model.addAttribute("dto", dto);
         model.addAttribute("permissions", permissionService.getAll());
@@ -57,5 +58,39 @@ public class AuthController extends AbstractController<AuthUserService> {
 
         service.create(dto);
         return "index-eski";
+    }
+
+    @RequestMapping(value = "reset-password", method = RequestMethod.GET)
+    public String changePasswordPage(Model model) {
+        String oldPassword = "";
+        String newPassword = "";
+        String confirm = "";
+
+        model.addAttribute("oldPassword", oldPassword);
+        model.addAttribute("newPassword", newPassword);
+        model.addAttribute("confirm", confirm);
+
+        return "auth/reset-password";
+    }
+
+    @RequestMapping(value = "reset-password", method = RequestMethod.POST)
+    public String changePassword(@Valid @ModelAttribute(name = "oldPassword") String oldPassword,
+                                 @Valid @ModelAttribute(name = "newPassword") String newPassword,
+                                 @Valid @ModelAttribute(name = "confirm") String confirm,
+                                 BindingResult bindingResult) {
+
+        if (!SessionUser.session().getPassword().equals(oldPassword))
+            throw new RuntimeException("Password invalid");
+
+        if (!newPassword.equals(confirm))
+            throw new RuntimeException("Confirm invalid");
+
+        if (bindingResult.hasErrors()) {
+            return "auth/reset-password";
+        }
+
+        service.changePassword(SessionUser.sessionId(), newPassword);
+
+        return "redirect:/auth/logout";
     }
 }
