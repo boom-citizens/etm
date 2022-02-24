@@ -1,6 +1,5 @@
-package uz.boom.citizens.controller;
+package uz.boom.citizens.controller.project;
 
-import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,11 +7,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.multipart.MultipartFile;
+import uz.boom.citizens.controller.AbstractController;
 import uz.boom.citizens.criteria.GenericCriteria;
 import uz.boom.citizens.dto.project.ProjectCreateDto;
 import uz.boom.citizens.dto.project.ProjectUpdateDto;
+import uz.boom.citizens.services.project.ProjectMemberServiceImpl;
 import uz.boom.citizens.services.project.ProjectService;
+import uz.boom.citizens.services.project.ProjectServiceImpl;
 
 import java.io.IOException;
 
@@ -23,11 +24,14 @@ import java.io.IOException;
  */
 @Controller
 @RequestMapping("/project/*")
-public class ProjectController extends AbstractController<ProjectService>{
+public class ProjectController extends AbstractController<ProjectService> {
+
+    private final ProjectMemberServiceImpl projectMemberService;
 
     @Autowired
-    public ProjectController(ProjectService service) {
+    public ProjectController(ProjectServiceImpl service, ProjectMemberServiceImpl projectMemberService) {
         super(service);
+        this.projectMemberService = projectMemberService;
     }
 
     @RequestMapping(value = "create/", method = RequestMethod.GET)
@@ -68,6 +72,7 @@ public class ProjectController extends AbstractController<ProjectService>{
     @RequestMapping(value = "detail/{id}/", method = RequestMethod.GET)
     public String detailPage(Model model, @PathVariable(name = "id") Long id) {
         model.addAttribute("project", service.get(id));
+        model.addAttribute("project_members", projectMemberService.getMembers(id));
         return "project/detail";
     }
 

@@ -10,7 +10,7 @@ import uz.boom.citizens.dto.auth.AuthUserDto;
 import uz.boom.citizens.dto.auth.AuthUserUpdateDto;
 import uz.boom.citizens.dto.file.ResourceDto;
 import uz.boom.citizens.entity.auth.AuthUser;
-import uz.boom.citizens.mapper.AuthUserMapper;
+import uz.boom.citizens.mapper.auth.AuthUserMapper;
 import uz.boom.citizens.reposiroty.auth.AuthUserRepository;
 import uz.boom.citizens.services.AbstractService;
 import uz.boom.citizens.services.file.FileStorageService;
