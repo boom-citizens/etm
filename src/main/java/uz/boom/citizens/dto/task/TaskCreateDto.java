@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import uz.boom.citizens.dto.Dto;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -16,6 +16,6 @@ public class TaskCreateDto implements Dto {
     private String name;
     private String description;
     private String level;
-    private LocalDate deadline;
     private String priority;
+    private Date deadline;
 }

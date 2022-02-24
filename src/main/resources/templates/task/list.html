@@ -1,10 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragment.html :: header('Tasks')">
 </head>
 <body>
-
+<header>
+    <section th:include="fragment.html :: navbar"></section>
+</header>
+<main>
+    <table class="table">
+        <thead class="thead-light">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Level</th>
+            <th scope="col">Priority</th>
+            <th scope="col">Deadline</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="task,iter :  ${tasks}">
+            <th th:text="${iter.count}"></th>
+            <th th:text="${task.name}"></th>
+            <th th:text="${task.description}"></th>
+            <th th:text="${task.level}"></th>
+            <th th:text="${task.priority}"></th>
+            <th th:text="${task.deadline}"></th>
+        </tr>
+        </tbody>
+    </table>
+</main>
+<footer>
+    <section th:include="fragment.html :: js-files"></section>
+</footer>
 </body>
 </html>

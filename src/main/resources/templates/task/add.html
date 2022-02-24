@@ -10,53 +10,35 @@
     <div class="container">
         <div class="row">
             <div class="col-10 mx-auto">
-                <form th:method="post" enctype="multipart/form-data">
-
+                <form th:method="post">
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input type="text" class="form-control" id="name" name="name"/>
                     </div>
 
-
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <input type="text" class="form-control" id="description" name="description"/>
+                        <textarea class="form-control" id="description" name="description" rows="3"></textarea>
                     </div>
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <div class="dropdown">
-                                <a class="btn btn-secondary dropdown-toggle" href="#" role="button"
-                                   id="dropdownMenuLink"
-                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Level
-                                </a>
 
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" th:href="@{add}">EASY</a>
-                                    <a class="dropdown-item" th:href="@{add}">HARD</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="nav-item active">
-                            <div class="dropdown">
-                                <a class="btn btn-secondary dropdown-toggle" href="#" role="button"
-                                   id="dropdownMenuPriority"
-                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Priority
-                                </a>
-
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuPriority">
-                                    <a class="dropdown-item" th:href="@{add}">LOW</a>
-                                    <a class="dropdown-item" th:href="@{add}">MUST</a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
+                    <label for="level">Choose Task Level:</label>
+                    <select name="level" id="level">
+                        <option th:value="easy">EASY</option>
+                        <option th:value="medium">MEDIUM</option>
+                        <option th:value="hard">HARD</option>
+                        <option th:value="harder">HARDER</option>
+                    </select>
+                    <label for="priority">Choose Task Priority:</label>
+                    <select name="priority" id="priority">
+                        <option th:value="easy">LOW</option>
+                        <option th:value="medium">MEDIUM</option>
+                        <option th:value="high">HIGH</option>
+                    </select>
                     <label for="deadline">DeadLine:</label>
 
                     <input type="date" id="deadline" name="deadline"
-                           value="2022-02-23"
-                           min="2022-02-23" max="2022-10-23">
+                           value="deadline"
+                           min="2010-02-23" max="2030-10-23">
 
                     <button type="submit" class="btn btn-primary">➕ Save</button>
                 </form>

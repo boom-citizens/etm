@@ -7,7 +7,7 @@ import uz.boom.citizens.dto.GenericDto;
 import uz.boom.citizens.entity.columns.ProjectColumn;
 import uz.boom.citizens.entity.project.Project;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -17,21 +17,19 @@ public class TaskDto extends GenericDto {
     private String name;
     private String description;
     private String level;
-    private LocalDate addedTime;
-    private LocalDate deadline;
+    private Date deadline;
     private String priority;
     private Long parentId;
     private boolean completed;
 
     @Builder(builderMethodName = "childBuilder")
-    public TaskDto(Long id, Project projectId, ProjectColumn columnId, String name, String description, String level, LocalDate addedTime, LocalDate deadline, String priority, Long parentId, boolean completed) {
+    public TaskDto(Long id, Project projectId, ProjectColumn columnId, String name, String description, String level, Date deadline, String priority, Long parentId, boolean completed) {
         super(id);
         this.projectId = projectId;
         this.columnId = columnId;
         this.name = name;
         this.description = description;
         this.level = level;
-        this.addedTime = addedTime;
         this.deadline = deadline;
         this.priority = priority;
         this.parentId = parentId;
