@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragment.html :: header('Organizations')">
+</head>
+<body>
+<header>
+    <section th:include="fragment.html :: navbar"></section>
+</header>
+<main>
+    <table class="table">
+        <thead class="thead-light">
+        <tr>
+            <th scope="col">#</th>
+         <!--   <th scope="col">Type</th>-->
+            <th scope="col">TaskId</th>
+            <th scope="col">Text</th>
+            <th scope="col">changes</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="comment,iter :  ${comments}">
+            <th th:text="${iter.count}"></th>
+<!--            <th th:text="${comment.commentType}"></th>-->
+            <th th:text="${comment.taskId}"></th>
+            <th th:text="${comment.commentText}"></th>
+            <th class="icons">
+                <a th:href="@{/comment/detail/{id}/(id=${comment.id})}">👁</a>
+                <a href="#">🔐</a>
+                <a href="#">🔓</a>
+                <a th:href="@{/comment/delete/{id}/(id=${comment.id})}">🗑</a>
+                <a th:href="@{/comment/update/{id}/(id=${comment.id}) }">🔄</a>
+            </th>
+        </tr>
+        </tbody>
+    </table>
+</main>
+<footer>
+    <section th:include="fragment.html :: js-files"></section>
+</footer>
+</body>
+</html>
