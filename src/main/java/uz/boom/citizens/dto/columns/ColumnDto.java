@@ -3,6 +3,7 @@ package uz.boom.citizens.dto.columns;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 import uz.boom.citizens.dto.GenericDto;
 import uz.boom.citizens.entity.project.Project;
 
@@ -14,7 +15,7 @@ public class ColumnDto extends GenericDto {
     private String name;
     private Project project_id;
     private int position;
-    private String  icon;
+    private String icon;
     private Boolean active;
 
     @Builder(builderMethodName = "childBuilder")

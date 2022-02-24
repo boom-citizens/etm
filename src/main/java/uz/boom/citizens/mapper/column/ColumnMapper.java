@@ -2,6 +2,7 @@ package uz.boom.citizens.mapper.column;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import org.springframework.stereotype.Component;
 import uz.boom.citizens.dto.columns.ColumnCreateDto;
 import uz.boom.citizens.dto.columns.ColumnDto;
@@ -29,9 +30,12 @@ public interface ColumnMapper extends BaseMapper<
 
     @Override
     @Mapping(target = "icon", ignore = true)
-    ProjectColumn fromCreateDto(ColumnCreateDto columnCreateDto);
+    ProjectColumn fromUpdateDto(ColumnUpdateDto dto);
 
     @Override
     @Mapping(target = "icon", ignore = true)
-    ProjectColumn fromUpdateDto(ColumnUpdateDto columnUpdateDto);
+    ProjectColumn fromCreateDto(ColumnCreateDto columnCreateDto);
+
+    @Mapping(target = "icon", ignore = true)
+    ProjectColumn fromUpdateDto(ColumnUpdateDto columnUpdateDto, @MappingTarget ProjectColumn column);
 }

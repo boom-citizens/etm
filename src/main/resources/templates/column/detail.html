@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragment.html :: header('Column Details Page')">
+</head>
+<body>
+<header>
+    <section th:include="fragment.html :: navbar"></section>
+</header>
+<main>
+
+    <div class="container mt-5">
+        <img th:src="@{${column.icon}}" class="rounded float-end" alt="logo" th:width="400px" th:align="right"/>
+        <dl class="row">
+            <dt class="col-sm-3">Column name</dt>
+            <dd class="col-sm-9" th:text="${column.name}"></dd>
+
+            <dt class="col-sm-3">Position</dt>
+            <dd class="col-sm-9" th:text="${column.position}"></dd>
+
+            <dt class="col-sm-3">Project id</dt>
+            <dd class="col-sm-9" th:text="${column.project_id}"></dd>
+
+        </dl>
+
+        <a th:href="@{{filepath}(filepath = ${column.icon})}" class="btn btn-primary">Download icon</a>
+        ||
+        <a th:href="@{/column/update/{id}/(id=${column.id}) }" class="btn btn-secondary">Update</a>
+    </div>
+</main>
+<!--<footer>
+    <section th:include="fragment.html :: js"></section>
+</footer>-->
+</body>
+</html>

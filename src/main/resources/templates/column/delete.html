@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragment.html :: header('Delete Column Page')">
+</head>
+<body>
+<header>
+    <section th:include="fragment.html :: navbar"></section>
+</header>
+<main>
+
+    <h1>Delete Column Page</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-8 mx-auto">
+                <ul>
+                    <li th:text="${column.name}"></li>
+                    <li>
+                        <img th:src="@{${column.icon}}" class="img-thumbnail" alt="icon" th:width="100px"/>
+                    </li>
+                </ul>
+                <form method="post" th:action="@{/column/delete/{id}(id=${column.id})}">
+                    <button type="submit" class="btn btn-danger">Yes</button>
+                    <a th:href="@{/}" class="btn btn-warning">No</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+<!--<footer>
+    <section th:include="fragment.html :: js"></section>
+</footer>-->
+</body>
+</html>

@@ -50,26 +50,42 @@ public class ColumnServiceImpl extends AbstractService<
 
     @Override
     public Void delete(Long id) {
+        repository.deleteById(id);
         return null;
     }
 
     @Override
     public Void update(ColumnUpdateDto updateDto) throws IOException {
+        ResourceDto resourceDto = fileStorageService.store(updateDto.getIcon());
+        ProjectColumn column = repository.findById(updateDto.getId()).orElseThrow(() -> {
+            throw new RuntimeException("not found");
+        });
+        mapper.fromUpdateDto(updateDto, column);
+        column.setIcon("/uploads/" + resourceDto.getPath());
+        repository.save(column);
         return null;
     }
 
     @Override
     public List<ColumnDto> getAll(GenericCriteria criteria) {
-        return null;
+        return mapper.toDto(repository.findAll());
     }
 
     @Override
     public ColumnDto get(Long id) {
-        return null;
+        ProjectColumn column = repository.findById(id).orElseThrow(() -> {
+            throw new RuntimeException("not found");
+        });
+        return mapper.toDto(column);
     }
 
     @Override
     public Long totalCount(GenericCriteria criteria) {
         return null;
     }
+
+
+
+
+
 }
