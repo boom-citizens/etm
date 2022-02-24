@@ -10,7 +10,6 @@ import uz.boom.citizens.dto.auth.AuthUserCreateDto;
 import uz.boom.citizens.dto.auth.AuthUserDto;
 import uz.boom.citizens.dto.auth.AuthUserUpdateDto;
 import uz.boom.citizens.dto.file.ResourceDto;
-import uz.boom.citizens.entity.auth.AuthRole;
 import uz.boom.citizens.entity.auth.AuthUser;
 import uz.boom.citizens.mapper.auth.AuthUserMapper;
 import uz.boom.citizens.reposiroty.auth.AuthUserRepository;
@@ -21,6 +20,7 @@ import uz.boom.citizens.utils.validators.auth.AuthUserValidator;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author D4uranbek вс. 15:01. 20.02.2022
@@ -46,15 +46,18 @@ public class AuthUserService extends AbstractService<AuthUserRepository, AuthUse
 
     @Override
     public Long create(AuthUserCreateDto dto) throws IOException {
-        ResourceDto resourceDto = fileStorageService.store(dto.getProfileImage());
         dto.setPassword(passwordEncoder.encode(dto.getPassword()));
         AuthUser user = mapper.fromCreateDto(dto);
-        user.setProfileImage("/uploads/" + resourceDto.getPath());
+
+        if (Objects.nonNull(dto.getProfileImage())) {
+            ResourceDto resourceDto = fileStorageService.store(dto.getProfileImage());
+            user.setProfileImage("/uploads/" + resourceDto.getPath());
+        }
+
         Long userId = repository.save(user).getId();
 
-        Long roleId = roleService.create(new AuthRole(dto.getRole(), dto.getRole()));
         String permissions = objectMapper.writeValueAsString(dto.getPermissions());
-        roleService.addPermissions(roleId, permissions);
+        roleService.addPermissions(userId, dto.getRole(), permissions);
 
         return userId;
     }
