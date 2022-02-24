@@ -1,5 +1,0 @@
-.wrapper {
-    display: grid;
-    background: lightgray;
-    grid-auto-columns: fit-content(300px);
-}

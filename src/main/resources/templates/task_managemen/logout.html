@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragment.html :: head(title='Task managment login', path='/css/login.css')">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +12,7 @@
         href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500;600;700&family=Red+Hat+Display&display=swap"
         rel="stylesheet">
 
-        <link rel="stylesheet" href="./assets/css/logout.css">
+        <link rel="stylesheet" href="../../static/css/logout.css">
 </head>
 <body>
     <div class="container">
