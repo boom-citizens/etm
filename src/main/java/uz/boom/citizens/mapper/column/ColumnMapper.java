@@ -21,11 +21,9 @@ public interface ColumnMapper extends BaseMapper<
         ColumnUpdateDto> {
 
     @Override
-
     ColumnDto toDto(ProjectColumn projectColumn);
 
     @Override
-
     List<ColumnDto> toDto(List<ProjectColumn> e);
 
     @Override

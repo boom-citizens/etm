@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragment.html :: header('Comment Details Page')">
+</head>
+<body>
+<header>
+    <section th:include="fragment.html :: navbar"></section>
+</header>
+<main>
+
+    <div class="container mt-5">
+
+        <dl class="row">
+           <!-- <dt class="col-sm-3">Organization name</dt>
+            <dd class="col-sm-9" th:text="${comment.commentType}"></dd>
+-->
+            <dt class="col-sm-3">Text</dt>
+            <dd class="col-sm-9" th:text="${comment.commentText}"></dd>
+
+        </dl>
+
+    </div>
+</main>
+<footer>
+    <section th:include="fragment.html :: js-files"></section>
+</footer>
+</body>
+</html>

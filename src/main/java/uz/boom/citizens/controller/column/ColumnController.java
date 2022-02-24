@@ -72,4 +72,7 @@ public class ColumnController extends AbstractController<ColumnService> {
         return "column/detail";
     }
 
+
+
+
 }
