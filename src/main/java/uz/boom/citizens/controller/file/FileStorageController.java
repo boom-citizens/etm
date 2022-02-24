@@ -1,4 +1,4 @@
-package uz.boom.citizens.controller;
+package uz.boom.citizens.controller.file;
 
 
 import org.springframework.beans.factory.annotation.Autowired;

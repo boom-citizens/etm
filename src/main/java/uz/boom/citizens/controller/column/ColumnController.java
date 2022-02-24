@@ -25,15 +25,11 @@ public class ColumnController extends AbstractController<ColumnService> {
     }
 
     @RequestMapping(value = "create", method = RequestMethod.GET)
-    public String columnPage(){
+    public String columnPage()
+    {
         return "column/create";
     }
 
-    @RequestMapping(value = "create",method = RequestMethod.POST)
-    public String create(@ModelAttribute ColumnCreateDto dto) throws IOException {
-        service.create(dto);
-        return "redirect:/";
-    }
 
 
     @RequestMapping(value = "update/{id}/",method = RequestMethod.GET)

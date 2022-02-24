@@ -20,15 +20,13 @@ public class ProjectUpdateDto extends GenericDto {
 
     private String name;
     private MultipartFile tzFile;
-    private Organization organization;
     private Boolean closed;
 
     @Builder(builderMethodName = "childBuilder")
-    public ProjectUpdateDto(Long id, String name, MultipartFile tzFile, Organization organization, Boolean closed) {
+    public ProjectUpdateDto(Long id, String name, MultipartFile tzFile, Boolean closed) {
         super(id);
         this.name = name;
         this.tzFile = tzFile;
-        this.organization = organization;
         this.closed = closed;
     }
 }

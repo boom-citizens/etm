@@ -17,10 +17,10 @@ public class Project extends Auditable {
     private String tzPath;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "organization_id")
+    @JoinColumn(name = "organization_id", referencedColumnName = "id")
     private Organization organization;
 
-    @Column(name = "closed")
+    @Column(name = "closed",columnDefinition="BOOLEAN DEFAULT false")
     private Boolean closed;
 /*
 

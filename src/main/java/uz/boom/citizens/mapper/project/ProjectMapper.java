@@ -1,4 +1,4 @@
-package uz.boom.citizens.mapper;
+package uz.boom.citizens.mapper.project;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -10,6 +10,7 @@ import uz.boom.citizens.dto.project.ProjectDto;
 import uz.boom.citizens.dto.project.ProjectUpdateDto;
 import uz.boom.citizens.entity.organization.Organization;
 import uz.boom.citizens.entity.project.Project;
+import uz.boom.citizens.mapper.BaseMapper;
 
 /**
  * Author : Qozoqboyev Ixtiyor

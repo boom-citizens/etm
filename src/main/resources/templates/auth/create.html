@@ -13,7 +13,7 @@
 
                 <div class="form-group">
                     <label for="username">Username</label>
-                    <input type="tel" class="form-control" id="username" name="username" placeholder="username">
+                    <input type="tel" class="form-control" id="username" name="username">
                     <span style="color: red" th:errors="*{username}"></span>
                 </div>
 
@@ -34,6 +34,25 @@
                     <input type="file" class="form-control" id="profileImage" name="profileImage"/>
                     <span style="color: red" th:errors="*{profileImage}"></span>
                 </div>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="ADMIN" value="ADMIN">
+                    <label class="form-check-label" for="ADMIN">ADMIN</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="MANAGER" value="MANAGER">
+                    <label class="form-check-label" for="MANAGER">MANAGER</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="EMPLOYEE"
+                           value="EMPLOYEE">
+                    <label class="form-check-label" for="EMPLOYEE">EMPLOYEE</label>
+                </div>
+
+                <ul class="form-check" th:each="permission : ${permissions}">
+                    <input class="form-check-input" type="checkbox" th:text="${permission.getCode()}"
+                           aria-label="...">
+                </ul>
 
                 <button type="submit" class="btn btn-primary">Create</button>
             </form>

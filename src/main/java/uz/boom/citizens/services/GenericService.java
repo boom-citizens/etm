@@ -2,6 +2,8 @@ package uz.boom.citizens.services;
 
 import uz.boom.citizens.criteria.GenericCriteria;
 import uz.boom.citizens.dto.GenericDto;
+import uz.boom.citizens.dto.auth.AuthUserDto;
+import uz.boom.citizens.entity.auth.AuthUser;
 
 import java.io.Serializable;
 import java.util.List;

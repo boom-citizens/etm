@@ -7,7 +7,6 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import uz.boom.citizens.configs.security.SessionUser;
 
 import javax.persistence.*;
 import java.time.Instant;

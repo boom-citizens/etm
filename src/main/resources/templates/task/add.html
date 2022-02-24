@@ -22,25 +22,41 @@
                         <label for="description">Description</label>
                         <input type="text" class="form-control" id="description" name="description"/>
                     </div>
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <div class="dropdown">
+                                <a class="btn btn-secondary dropdown-toggle" href="#" role="button"
+                                   id="dropdownMenuLink"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Level
+                                </a>
 
-                    <div class="dropdown">
-                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Level
-                        </a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" th:href="@{add}">EASY</a>
+                                    <a class="dropdown-item" th:href="@{add}">HARD</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item active">
+                            <div class="dropdown">
+                                <a class="btn btn-secondary dropdown-toggle" href="#" role="button"
+                                   id="dropdownMenuPriority"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Priority
+                                </a>
 
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <li th:value="EASY" id="EASY">Easy</li>
-                            <li th:value="HARD" id="HARD">Hard</li>
-                        </div>
-                    </div>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuPriority">
+                                    <a class="dropdown-item" th:href="@{add}">LOW</a>
+                                    <a class="dropdown-item" th:href="@{add}">MUST</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <label for="deadline">DeadLine:</label>
 
-                    <label for="addedTime">Added date:</label>
-
-                    <input type="date" id="addedTime" name="addedTime"
+                    <input type="date" id="deadline" name="deadline"
                            value="2022-02-23"
                            min="2022-02-23" max="2022-10-23">
-
 
                     <button type="submit" class="btn btn-primary">➕ Save</button>
                 </form>
