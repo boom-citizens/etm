@@ -56,6 +56,6 @@ public class AuthController extends AbstractController<AuthUserService> {
         }
 
         service.create(dto);
-        return "index";
+        return "index-eski";
     }
 }

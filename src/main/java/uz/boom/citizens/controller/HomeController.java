@@ -25,7 +25,7 @@ public class HomeController {
 
     @RequestMapping(value = {""}, method = RequestMethod.GET)
     public String homePage() {
-        return "index";
+        return "index-eski";
     }
 
     @RequestMapping(value = {"/index"}, method = RequestMethod.GET)
