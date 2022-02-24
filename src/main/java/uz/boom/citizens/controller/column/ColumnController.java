@@ -45,7 +45,7 @@ public class ColumnController extends AbstractController<ColumnService> {
     @RequestMapping(value = "update/{id}/", method = RequestMethod.POST)
     public String update(@ModelAttribute ColumnUpdateDto dto) throws IOException {
         service.update(dto);
-        return "column/update";
+        return "redirect:/";
     }
 
     @RequestMapping(value = "list/", method = RequestMethod.GET)
