@@ -19,6 +19,7 @@ import uz.boom.citizens.utils.validators.column.ColumnValidator;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class ColumnServiceImpl extends AbstractService<
@@ -56,12 +57,23 @@ public class ColumnServiceImpl extends AbstractService<
 
     @Override
     public Void update(ColumnUpdateDto updateDto) throws IOException {
-        ResourceDto resourceDto = fileStorageService.store(updateDto.getIcon());
         ProjectColumn column = repository.findById(updateDto.getId()).orElseThrow(() -> {
             throw new RuntimeException("not found");
         });
+        if (!updateDto.getName().equals("")) {
+            column.setName(updateDto.getName());
+        }
+
+        if ( updateDto.getIcon().getSize() !=0 ) {
+            ResourceDto resourceDto = fileStorageService.store(updateDto.getIcon());
+            column.setIcon("/uploads/" + resourceDto.getPath());
+        }
+
+//        column.setPosition(updateDto.getPosition());
+//        column.setActive(updateDto.getActive());
+//        column.setProject_id(updateDto.getProject_id());
+
         mapper.fromUpdateDto(updateDto, column);
-        column.setIcon("/uploads/" + resourceDto.getPath());
         repository.save(column);
         return null;
     }
