@@ -3,6 +3,7 @@ package uz.boom.citizens.controller.auth;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -80,10 +81,10 @@ public class AuthController extends AbstractController<AuthUserService> {
                                  BindingResult bindingResult) {
 
         if (!SessionUser.session().getPassword().equals(oldPassword))
-            throw new RuntimeException("Password invalid");
+            bindingResult.addError(new FieldError("oldPassword", "oldPassword", "Password invalid"));
 
         if (!newPassword.equals(confirm))
-            throw new RuntimeException("Confirm invalid");
+            bindingResult.addError(new FieldError("confirm", "confirm", "Confirm invalid"));
 
         if (bindingResult.hasErrors()) {
             return "auth/reset-password";
