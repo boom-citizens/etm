@@ -33,6 +33,6 @@ public class HomeController {
         model.addAttribute("session", SessionUser.session());
         model.addAttribute("projects", projectService.getAll(new GenericCriteria()));
         model.addAttribute("tasks", taskService.getAll(new GenericCriteria()));
-        return "index";
+        return "task_managemen/index";
     }
 }
