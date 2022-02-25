@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:include="fragment.html :: header('Index Page')">
-</head>
+<head th:include="fragment.html :: head(title='Task managment login', path='/css/index.css')"></head>
+
 <body>
-<header>
-    <section th:include="fragment.html :: navbar"></section>
-</header>
-<main>
+
+
+<div class="container">
     <h1 th:text="${code}"></h1>
-</main>
-<footer>
-    <section th:include="fragment.html :: js-files"></section>
-</footer>
+</div>
 </body>
+
 </html>
