@@ -29,12 +29,15 @@
         <i class="fas fa-bars"></i>
     </div>
     <div class="logo">
-        <img src="../../static/imges/logo.png" alt="">
+        <!--<img src="../../static/imges/logo.png" alt="">-->
+        <img th:src="@{${session?.organization?.logo}}" class="img-thumbnail" alt="logo" th:width="100px"/>
     </div>
 
-    <div class="link">
-        <a href="#"> -- Clients
-        </a>
+    <div class="link" th:each="permission : ${session?.role?.permissions}">
+
+        <a href="#" th:text="${permission?.code}"></a>
+
+        <a href="#"> -- Clients</a>
         <a href="#">Task manager</a>
         <a href="#">Inbox</a>
         <a href="#">Contacts</a>
