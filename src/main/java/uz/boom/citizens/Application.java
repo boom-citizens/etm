@@ -1,5 +1,6 @@
 package uz.boom.citizens;
 
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -9,7 +10,7 @@ import uz.boom.citizens.reposiroty.auth.AuthUserRepository;
 import java.util.Arrays;
 
 @SpringBootApplication
-public class Application/* implements CommandLineRunner */ {
+public class Application/* implements CommandLineRunner*/ {
 
     private final AuthUserRepository authUserRepository;
     private final PasswordEncoder passwordEncoder;
@@ -25,7 +26,7 @@ public class Application/* implements CommandLineRunner */ {
 
     }
 
-//      @Override
+//    @Override
     public void run(String... args) throws Exception {
 
         authUserRepository.deleteAll();

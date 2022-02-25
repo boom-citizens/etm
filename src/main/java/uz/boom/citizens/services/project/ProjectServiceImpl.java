@@ -79,8 +79,8 @@ public class ProjectServiceImpl extends AbstractService<ProjectRepository, Proje
     @Override
     public List<ProjectDto> getAll(GenericCriteria criteria) {
         UserDetails session = SessionUser.session();
-        Long orgId = session.getOrganization().getId();
-        return mapper.toDto(repository.findAllByOrganization_Id(orgId));
+        //Long orgId = session.getOrganization().getId();
+        return mapper.toDto(repository.findAll());
     }
 
     @Override

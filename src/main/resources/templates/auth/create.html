@@ -7,7 +7,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-6 offset-3">
+        <div class="col-md-6 offset-3" style="height:300px; overflow-y: scroll;">
             <form name="f" th:action="@{/auth/create}" th:method="POST" enctype="multipart/form-data" th:object="${dto}"
                   onsubmit="validate()">
 
