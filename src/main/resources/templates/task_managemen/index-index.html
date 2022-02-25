@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragment-index.html :: head(title='Task managment', path='/css/index.css')"></head>
+<body>
+<header>
+    <main th:include="fragment-index.html :: main"></main>
+
+    <aside>
+        <nav th:include="fragment-index.html :: navigation"></nav>
+
+        <div class="container">
+            <h3 th:text="${session?.organization?.name}"></h3>
+
+            <div class="content">
+                <div class="contents">
+                    <div class="content-text">
+                        <p>Projects</p>
+                        <p>Add project</p>
+                    </div>
+                    <div class="box" th:each="project : ${projects}">
+                        <p th:text="${project.name}"></p>
+                        <div class="box-text">
+                            <span th:text="${project.closed}">
+                                <!--<img src="../../static/imges/sunrise.png" alt="">12/04/2021-->
+                            </span>
+                            <span>
+                                <file th:src="@{${project.tzPath}}" alt="tzPath"></file>
+                                <!--<img src="../../static/imges/sunset2.png" alt=""> 12/04/2021-->
+                            </span>
+                            <span>
+                                <img src="../../static/imges/users.png" alt=""> Adyl, Azhar, Arthur
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <div class="content-text">
+                        <p>Tasks</p>
+                    </div>
+                    <div class="box" th:each="task : ${tasks}">
+
+                        <div class="box-text">
+                            <p th:text="${task.name}"></p>
+                            <span>
+                                <p th:text="${task.deadline}"></p>
+                                <!--<img src="../../static/imges/sunrise.png" alt="">12/04/2021-->
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+</header>
+
+<script>
+    const menu = document.querySelector(".menu-bar")
+    const main = document.querySelector("main")
+    menu.addEventListener("click", () => {
+        main.classList.toggle("open")
+    })
+</script>
+</body>
+</html>
