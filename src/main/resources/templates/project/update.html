@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:include="fragment.html :: header('Project update Page')">
+<head th:include="fragment.html :: head(title='Project update Page',path='/css/index.css')">
 </head>
 <body>
-<header>
-    <section th:include="fragment.html :: navbar"></section>
-</header>
+<!--<header>-->
+<!--    <section th:include="fragment.html :: navbar"></section>-->
+<!--</header>-->
 <main>
     <div class="container">
         <div class="row">
             <div class="col-10 mx-auto">
                 <form th:method="post" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label for="name">Name</label><!--<span th:text="' ('+${project.name}+')'"></span>-->
+                        <label for="name">Name</label><span th:text="' ('+${project.name}+')'"></span>
                         <input type="text" class="form-control" id="name" name="name"/>
                     </div>
 

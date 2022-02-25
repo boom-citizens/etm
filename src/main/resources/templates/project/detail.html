@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:include="fragment.html :: header('Project Detail Page')">
-</head>
+<head th:include="fragment.html :: head(title='Project Detail Page',path='/css/index.css')"></head>
 <body>
-<header>
-    <section th:include="fragment.html :: navbar"></section>
-</header>
+<!--<header>-->
+<!--    <section th:include="fragment.html :: navbar"></section>-->
+<!--</header>-->
 <main>
 
     <h1>Project Detail Page</h1>
@@ -32,6 +31,7 @@
                     </tr>
                     </thead>
                     <tbody>
+                    <a class="btn btn-info" th:href="@{/project/add_member/{id}/(id=${project.id})}">➕Add</a>
                     <tr th:each="member,iter :  ${project_members}">
                         <th th:text="${iter.count}"></th>
                         <th th:text="${member.username}"></th>

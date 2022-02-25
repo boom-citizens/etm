@@ -17,21 +17,51 @@
                         <p>Projects</p>
                         <p>Add project</p>
                     </div>
-                    <div class="box" th:each="project : ${projects}">
-                        <p th:text="${project.name}"></p>
+                    <!--<div class="box" th:each="project : ${projects}" >
+                        <a th:href="@{/project/detail/{id}/(id=${project.id})}">
                         <div class="box-text">
+                            <span th:text="${project.name}"></span>
                             <span th:text="${project.closed}">
-                                <!--<img src="../../static/imges/sunrise.png" alt="">12/04/2021-->
+                                &lt;!&ndash;<img src="../../static/imges/sunrise.png" alt="">12/04/2021&ndash;&gt;
                             </span>
                             <span>
-                                <file th:src="@{${project.tzPath}}" alt="tzPath"></file>
-                                <!--<img src="../../static/imges/sunset2.png" alt=""> 12/04/2021-->
+                            <img th:src="@{${project.tzPath}}" class="img-thumbnail" alt="logo" th:width="50px"/>
+                                &lt;!&ndash;<img src="../../static/imges/sunset2.png" alt=""> 12/04/2021&ndash;&gt;
                             </span>
                             <span>
                                 <img src="../../static/imges/users.png" alt=""> Adyl, Azhar, Arthur
                             </span>
                         </div>
-                    </div>
+                        </a>
+                    </div>-->
+                    <table class="table">
+                        <thead class="thead-light">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Tz</th>
+                            <th scope="col">Closed</th>
+                            <th scope="col">Active</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="project,iter :  ${projects}">
+                            <th th:text="${iter.count}"></th>
+                            <th th:text="${project.name}"></th>
+                            <th>
+                                <img th:src="@{${project.tzPath}}" class="img-thumbnail" alt="logo" th:width="100px"/>
+                            </th>
+                            <th th:text="${project.closed}"></th>
+                            <th class="icons">
+                                <a th:href="@{/project/detail/{id}/(id=${project.id})}">👁</a>
+                                <a th:href="@{/project/update/{id}/(id=${project.id})}">🔄</a>
+                                <a href="#">🔓</a>
+                                <a th:href="@{/project/delete/{id}/(id=${project.id})}">🗑</a>
+                                <a th:href="@{/project/add_member/{id}/(id=${project.id})}">Add</a>
+                            </th>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
 
                 <div class="content-box">
