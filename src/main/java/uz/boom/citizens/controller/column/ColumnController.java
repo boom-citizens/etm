@@ -13,6 +13,7 @@ import uz.boom.citizens.dto.columns.ColumnCreateDto;
 import uz.boom.citizens.dto.columns.ColumnUpdateDto;
 import uz.boom.citizens.services.column.ColumnService;
 import uz.boom.citizens.services.project.ProjectServiceImpl;
+import uz.boom.citizens.services.task.TaskServiceImpl;
 
 import java.io.IOException;
 
@@ -21,11 +22,13 @@ import java.io.IOException;
 public class ColumnController extends AbstractController<ColumnService> {
 
     private final ProjectServiceImpl projectService;
+    private final TaskServiceImpl taskService;
 
     @Autowired
-    public ColumnController(ColumnService service, ProjectServiceImpl projectService) {
+    public ColumnController(ColumnService service, ProjectServiceImpl projectService, TaskServiceImpl taskService) {
         super(service);
         this.projectService = projectService;
+        this.taskService = taskService;
     }
 
     @RequestMapping(value = "create", method = RequestMethod.GET)
@@ -42,6 +45,7 @@ public class ColumnController extends AbstractController<ColumnService> {
     @RequestMapping(value = "internal/{id}/", method = RequestMethod.GET)
     public String internalPage(Model model, @PathVariable(name = "id") Long id) {
         model.addAttribute("columns",service.getAllById(new GenericCriteria(),id));
+        model.addAttribute("tasks",taskService.getAllById(new GenericCriteria(),id));
         model.addAttribute("project",projectService.get(id));
         return "project/internal";
     }

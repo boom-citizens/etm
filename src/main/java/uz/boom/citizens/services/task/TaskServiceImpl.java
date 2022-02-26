@@ -5,8 +5,10 @@ import uz.boom.citizens.criteria.GenericCriteria;
 import uz.boom.citizens.dto.task.TaskCreateDto;
 import uz.boom.citizens.dto.task.TaskDto;
 import uz.boom.citizens.dto.task.TaskUpdateDto;
+import uz.boom.citizens.entity.project.Project;
 import uz.boom.citizens.entity.task.Task;
 import uz.boom.citizens.mapper.task.TaskMapper;
+import uz.boom.citizens.reposiroty.project.ProjectRepository;
 import uz.boom.citizens.reposiroty.task.TaskRepository;
 import uz.boom.citizens.services.AbstractService;
 import uz.boom.citizens.utils.BaseUtils;
@@ -17,8 +19,12 @@ import java.util.List;
 
 @Service
 public class TaskServiceImpl extends AbstractService<TaskRepository, TaskMapper, TaskValidator> implements TaskService {
-    protected TaskServiceImpl(TaskRepository repository, TaskMapper mapper, TaskValidator validator, BaseUtils baseUtils) {
+
+    private final ProjectRepository projectRepository;
+
+    protected TaskServiceImpl(TaskRepository repository, TaskMapper mapper, TaskValidator validator, BaseUtils baseUtils, ProjectRepository projectRepository) {
         super(repository, mapper, validator, baseUtils);
+        this.projectRepository = projectRepository;
     }
 
     @Override
@@ -51,7 +57,10 @@ public class TaskServiceImpl extends AbstractService<TaskRepository, TaskMapper,
 
     @Override
     public List<TaskDto> getAllById(GenericCriteria criteria, Long id) {
-        return mapper.toDto(repository.findAll());
+        Project project = projectRepository.findById(id).orElseThrow(() -> {
+            throw new RuntimeException("not found");
+        });
+        return mapper.toDto(repository.findAllByProject_id(project));
     }
 
     @Override

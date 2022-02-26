@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:include="fragment.html :: header('Tasks')">
+<head th:include="fragment.html :: head(title='Tasks', path='/css/index.css')">
 </head>
 <body>
-<header>
-    <section th:include="fragment.html :: navbar"></section>
-</header>
+<!--<header>-->
+<!--    <section th:include="fragment.html :: navbar"></section>-->
+<!--</header>-->
 <main>
     <table class="table">
         <thead class="thead-light">

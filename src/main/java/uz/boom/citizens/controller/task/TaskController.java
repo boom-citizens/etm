@@ -32,12 +32,12 @@ public class TaskController extends AbstractController<TaskService> {
     }
 
 
-    @RequestMapping(value = "add/", method = RequestMethod.GET)
+    @RequestMapping(value = "create/", method = RequestMethod.GET)
     private String addTaskPage() {
-        return "task/add";
+        return "task/create";
     }
 
-    @RequestMapping(value = "add/", method = RequestMethod.POST)
+    @RequestMapping(value = "create/", method = RequestMethod.POST)
     private String add(@ModelAttribute TaskCreateDto createDto) throws IOException {
         service.create(createDto);
         return "redirect:/task/list";
@@ -73,7 +73,7 @@ public class TaskController extends AbstractController<TaskService> {
         return "task/details";
     }
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @RequestMapping(value = "list", method = RequestMethod.GET)
     public String listPage(Model model) {
         model.addAttribute("tasks", service.getAll(new GenericCriteria()));
         return "task/list";

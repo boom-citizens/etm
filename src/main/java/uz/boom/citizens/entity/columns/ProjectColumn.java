@@ -29,6 +29,4 @@ public class ProjectColumn extends Auditable {
 
     @Column(name = "active")
     private Boolean active;
-
-
 }
