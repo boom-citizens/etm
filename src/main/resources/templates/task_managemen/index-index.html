@@ -42,14 +42,16 @@
                             <th scope="col">Tz</th>
                             <th scope="col">Closed</th>
                             <th scope="col">Active</th>
+                            <th scope="col">Enter</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr th:each="project,iter :  ${projects}">
                             <th th:text="${iter.count}"></th>
-                            <th th:text="${project.name}"></th>
+                            <th><a th:href="@{/column/internal/{id}/(id=${project.id})}" th:text="${project.name}" ></a></th>
                             <th>
-                                <img th:src="@{${project.tzPath}}" class="img-thumbnail" alt="logo" th:width="100px"/>
+                                <img th:src="@{${project.tzPath}}" class="img-thumbnail" alt="logo"
+                                     th:width="100px"/>
                             </th>
                             <th th:text="${project.closed}"></th>
                             <th class="icons">
@@ -57,7 +59,6 @@
                                 <a th:href="@{/project/update/{id}/(id=${project.id})}">🔄</a>
                                 <a href="#">🔓</a>
                                 <a th:href="@{/project/delete/{id}/(id=${project.id})}">🗑</a>
-                                <a th:href="@{/project/add_member/{id}/(id=${project.id})}">Add</a>
                             </th>
                         </tr>
                         </tbody>

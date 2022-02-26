@@ -14,7 +14,6 @@ import uz.boom.citizens.utils.validators.comment.CommentValidator;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Objects;
 
 @Service
 
@@ -58,8 +57,13 @@ public class CommentServiceImpl extends AbstractService<
     }
 
     @Override
-    public List<CommentDto> getAll(GenericCriteria criteria) {
+    public List<CommentDto> getAllById(GenericCriteria criteria, Long id) {
         return mapper.toDto(repository.findAll());
+    }
+
+    @Override
+    public List<CommentDto> getAll(GenericCriteria criteria) {
+        return null;
     }
 
     @Override

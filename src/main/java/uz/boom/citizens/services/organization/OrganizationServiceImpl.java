@@ -1,7 +1,6 @@
 package uz.boom.citizens.services.organization;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import uz.boom.citizens.criteria.GenericCriteria;
 import uz.boom.citizens.dto.file.ResourceDto;
@@ -64,8 +63,13 @@ public class OrganizationServiceImpl extends AbstractService<OrganizationReposit
     }
 
     @Override
-    public List<OrganizationDto> getAll(GenericCriteria criteria) {
+    public List<OrganizationDto> getAllById(GenericCriteria criteria, Long id) {
         return mapper.toDto(repository.findAll());
+    }
+
+    @Override
+    public List<OrganizationDto> getAll(GenericCriteria criteria) {
+        return null;
     }
 
     @Override

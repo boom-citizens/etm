@@ -8,7 +8,6 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import uz.boom.citizens.controller.AbstractController;
 import uz.boom.citizens.criteria.GenericCriteria;
-import uz.boom.citizens.dto.organization.OrganizationUpdateDto;
 import uz.boom.citizens.dto.task.TaskCreateDto;
 import uz.boom.citizens.dto.task.TaskUpdateDto;
 import uz.boom.citizens.services.task.TaskService;

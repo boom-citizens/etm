@@ -73,6 +73,11 @@ public class AuthUserService extends AbstractService<AuthUserRepository, AuthUse
     }
 
     @Override
+    public List<AuthUserDto> getAllById(GenericCriteria criteria, Long id) {
+        return null;
+    }
+
+    @Override
     public List<AuthUserDto> getAll(GenericCriteria criteria) {
         return null;
     }

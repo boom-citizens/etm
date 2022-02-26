@@ -2,8 +2,6 @@ package uz.boom.citizens.services;
 
 import uz.boom.citizens.criteria.GenericCriteria;
 import uz.boom.citizens.dto.GenericDto;
-import uz.boom.citizens.dto.auth.AuthUserDto;
-import uz.boom.citizens.entity.auth.AuthUser;
 
 import java.io.Serializable;
 import java.util.List;
@@ -20,6 +18,8 @@ public interface GenericService<
         K extends Serializable> extends BaseService {
 
     List<D> getAll(C criteria);
+
+    List<D> getAllById(C criteria, Long id);
 
     D get(K id);
 

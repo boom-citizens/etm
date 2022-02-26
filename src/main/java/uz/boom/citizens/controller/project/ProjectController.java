@@ -11,7 +11,6 @@ import uz.boom.citizens.controller.AbstractController;
 import uz.boom.citizens.criteria.GenericCriteria;
 import uz.boom.citizens.dto.project.ProjectCreateDto;
 import uz.boom.citizens.dto.project.ProjectUpdateDto;
-import uz.boom.citizens.entity.auth.AuthPermission;
 import uz.boom.citizens.services.project.ProjectMemberServiceImpl;
 import uz.boom.citizens.services.project.ProjectService;
 import uz.boom.citizens.services.project.ProjectServiceImpl;
@@ -40,6 +39,7 @@ public class ProjectController extends AbstractController<ProjectService> {
     public String createPage() {
         return "project/create";
     }
+
 
     @RequestMapping(value = "create/", method = RequestMethod.POST)
     public String create(@ModelAttribute ProjectCreateDto dto) throws IOException {

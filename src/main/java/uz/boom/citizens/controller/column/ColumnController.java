@@ -12,6 +12,7 @@ import uz.boom.citizens.criteria.GenericCriteria;
 import uz.boom.citizens.dto.columns.ColumnCreateDto;
 import uz.boom.citizens.dto.columns.ColumnUpdateDto;
 import uz.boom.citizens.services.column.ColumnService;
+import uz.boom.citizens.services.project.ProjectServiceImpl;
 
 import java.io.IOException;
 
@@ -19,9 +20,12 @@ import java.io.IOException;
 @RequestMapping("/column/*")
 public class ColumnController extends AbstractController<ColumnService> {
 
+    private final ProjectServiceImpl projectService;
+
     @Autowired
-    public ColumnController(ColumnService service) {
+    public ColumnController(ColumnService service, ProjectServiceImpl projectService) {
         super(service);
+        this.projectService = projectService;
     }
 
     @RequestMapping(value = "create", method = RequestMethod.GET)
@@ -32,7 +36,14 @@ public class ColumnController extends AbstractController<ColumnService> {
     @RequestMapping(value = "create", method = RequestMethod.POST)
     public String create(@ModelAttribute ColumnCreateDto dto) throws IOException {
         service.create(dto);
-        return "redirect:/";
+        return "redirect:/column/list";
+    }
+
+    @RequestMapping(value = "internal/{id}/", method = RequestMethod.GET)
+    public String internalPage(Model model, @PathVariable(name = "id") Long id) {
+        model.addAttribute("columns",service.getAllById(new GenericCriteria(),id));
+        model.addAttribute("project",projectService.get(id));
+        return "project/internal";
     }
 
 

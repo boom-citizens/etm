@@ -18,7 +18,7 @@ public class Project extends Auditable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "organization_id", referencedColumnName = "id")
-    private Organization organization;
+    private Organization organization_id;
 
     @Column(name = "closed",columnDefinition="BOOLEAN DEFAULT false")
     private Boolean closed;
@@ -82,11 +82,11 @@ public class Project extends Auditable {
     }
 
     public Organization getOrganization() {
-        return organization;
+        return organization_id;
     }
 
     public void setOrganization(Organization organization) {
-        this.organization = organization;
+        this.organization_id = organization;
     }
 
     public String getTzPath() {

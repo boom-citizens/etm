@@ -35,6 +35,11 @@ public class TaskServiceImpl extends AbstractService<TaskRepository, TaskMapper,
     }
 
     @Override
+    public List<TaskDto> getAll(GenericCriteria criteria) {
+        return null;
+    }
+
+    @Override
     public Void update(TaskUpdateDto updateDto) throws IOException {
         Task updateTask = repository.findById(updateDto.getId()).orElseThrow(() -> {
             throw new RuntimeException("Task Not found");
@@ -45,7 +50,7 @@ public class TaskServiceImpl extends AbstractService<TaskRepository, TaskMapper,
     }
 
     @Override
-    public List<TaskDto> getAll(GenericCriteria criteria) {
+    public List<TaskDto> getAllById(GenericCriteria criteria, Long id) {
         return mapper.toDto(repository.findAll());
     }
 

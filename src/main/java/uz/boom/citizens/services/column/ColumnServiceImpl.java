@@ -1,8 +1,5 @@
 package uz.boom.citizens.services.column;
 
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import uz.boom.citizens.criteria.GenericCriteria;
 import uz.boom.citizens.dto.columns.ColumnCreateDto;
@@ -10,16 +7,19 @@ import uz.boom.citizens.dto.columns.ColumnDto;
 import uz.boom.citizens.dto.columns.ColumnUpdateDto;
 import uz.boom.citizens.dto.file.ResourceDto;
 import uz.boom.citizens.entity.columns.ProjectColumn;
+import uz.boom.citizens.entity.project.Project;
 import uz.boom.citizens.mapper.column.ColumnMapper;
 import uz.boom.citizens.reposiroty.colmun.ColumnRepository;
+import uz.boom.citizens.reposiroty.project.ProjectRepository;
 import uz.boom.citizens.services.AbstractService;
 import uz.boom.citizens.services.file.FileStorageService;
+import uz.boom.citizens.services.project.ProjectServiceImpl;
 import uz.boom.citizens.utils.BaseUtils;
 import uz.boom.citizens.utils.validators.column.ColumnValidator;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class ColumnServiceImpl extends AbstractService<
@@ -29,14 +29,16 @@ public class ColumnServiceImpl extends AbstractService<
         implements ColumnService {
 
     private final FileStorageService fileStorageService;
+    private final ProjectRepository projectRepository;
 
     protected ColumnServiceImpl(ColumnRepository repository,
                                 ColumnMapper mapper,
                                 ColumnValidator validator,
                                 BaseUtils baseUtils,
-                                FileStorageService fileStorageService) {
+                                FileStorageService fileStorageService, ProjectServiceImpl projectService, ProjectRepository projectRepository) {
         super(repository, mapper, validator, baseUtils);
         this.fileStorageService = fileStorageService;
+        this.projectRepository = projectRepository;
     }
 
 
@@ -79,8 +81,16 @@ public class ColumnServiceImpl extends AbstractService<
     }
 
     @Override
+    public List<ColumnDto> getAllById(GenericCriteria criteria, Long id) {
+        Project project = projectRepository.findById(id).orElseThrow(() -> {
+            throw new RuntimeException("not found");
+        });
+        return mapper.toDto(repository.findAllByProject_id(project));
+    }
+
+    @Override
     public List<ColumnDto> getAll(GenericCriteria criteria) {
-        return mapper.toDto(repository.findAll());
+        return null;
     }
 
     @Override

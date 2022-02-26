@@ -4,22 +4,18 @@ import org.springframework.stereotype.Service;
 import uz.boom.citizens.configs.security.SessionUser;
 import uz.boom.citizens.configs.security.UserDetails;
 import uz.boom.citizens.criteria.GenericCriteria;
-import uz.boom.citizens.dto.auth.AuthUserDto;
 import uz.boom.citizens.dto.file.ResourceDto;
 import uz.boom.citizens.dto.project.ProjectCreateDto;
 import uz.boom.citizens.dto.project.ProjectDto;
 import uz.boom.citizens.dto.project.ProjectUpdateDto;
-import uz.boom.citizens.entity.auth.AuthUser;
+import uz.boom.citizens.entity.organization.Organization;
 import uz.boom.citizens.entity.project.Project;
-import uz.boom.citizens.entity.project.ProjectMember;
 import uz.boom.citizens.mapper.project.ProjectMapper;
-import uz.boom.citizens.mapper.organization.OrganizationMapper;
+import uz.boom.citizens.reposiroty.organization.OrganizationRepository;
 import uz.boom.citizens.reposiroty.project.ProjectMemberRepository;
 import uz.boom.citizens.reposiroty.project.ProjectRepository;
-import uz.boom.citizens.reposiroty.auth.AuthUserRepository;
 import uz.boom.citizens.services.AbstractService;
 import uz.boom.citizens.services.file.FileStorageService;
-import uz.boom.citizens.services.organization.OrganizationServiceImpl;
 import uz.boom.citizens.utils.BaseUtils;
 import uz.boom.citizens.utils.validators.project.ProjectValidator;
 
@@ -36,10 +32,12 @@ public class ProjectServiceImpl extends AbstractService<ProjectRepository, Proje
         implements ProjectService {
 
     private final FileStorageService fileStorageService;
+    private final OrganizationRepository organizationRepository;
 
-    public ProjectServiceImpl(ProjectRepository repository, ProjectMapper mapper, ProjectValidator validator, BaseUtils baseUtils, OrganizationServiceImpl organizationService, OrganizationMapper organizationMapper, FileStorageService fileStorageService, AuthUserRepository authUserRepository, ProjectMemberRepository projectMemberRepository) {
+    public ProjectServiceImpl(ProjectRepository repository, ProjectMapper mapper, ProjectValidator validator, BaseUtils baseUtils, FileStorageService fileStorageService, ProjectMemberRepository projectMemberRepository, OrganizationRepository organizationRepository) {
         super(repository, mapper, validator, baseUtils);
         this.fileStorageService = fileStorageService;
+        this.organizationRepository = organizationRepository;
     }
 
 
@@ -77,10 +75,20 @@ public class ProjectServiceImpl extends AbstractService<ProjectRepository, Proje
     }
 
     @Override
-    public List<ProjectDto> getAll(GenericCriteria criteria) {
+    public List<ProjectDto> getAllById(GenericCriteria criteria, Long id) {
         UserDetails session = SessionUser.session();
         //Long orgId = session.getOrganization().getId();
         return mapper.toDto(repository.findAll());
+    }
+
+    @Override
+    public List<ProjectDto> getAll(GenericCriteria criteria) {
+        UserDetails session = SessionUser.session();
+        Long orgId = session.getOrganization().getId();
+        Organization organization = organizationRepository.findById(orgId).orElseThrow(() -> {
+            throw new RuntimeException("Topilmadi");
+        });
+        return mapper.toDto(repository.findAllByOrganization_id(organization));
     }
 
     @Override
