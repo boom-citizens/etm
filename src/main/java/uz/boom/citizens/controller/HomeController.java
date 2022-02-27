@@ -23,12 +23,12 @@ public class HomeController {
         this.taskService = taskService;
     }
 
-    @RequestMapping(value = {""}, method = RequestMethod.GET)
-    public String homePage() {
-        return "index";
-    }
+//    @RequestMapping(value = {""}, method = RequestMethod.GET)
+//    public String homePage() {
+//        return "index";
+//    }
 
-    @RequestMapping(value = {"index"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"", "index"}, method = RequestMethod.GET)
     public String indexPage(Model model) {
         model.addAttribute("session_user", SessionUser.session());
         model.addAttribute("projects", projectService.getAll(new GenericCriteria()));
