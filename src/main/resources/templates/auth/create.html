@@ -51,14 +51,16 @@
 
             <div class="user-information">
                 <div class="icon">
-                    <img src="../static/imges/bell.png" alt="">
+                    <i class="far fa-bell"></i>
                     <i class="far fa-envelope"></i>
                 </div>
 
                 <div class="user">
                     <img th:src="@{${session_user.profileImage}}" style="width: 50px;" alt="logo"/>
                     <p th:text="${session_user.username}">
-                        <i class="fas fa-angle-down"></i>
+                    <div class="icon">
+                        <i class="fa fa-angle-down"></i>
+                    </div>
                     </p>
                 </div>
             </div>
