@@ -49,6 +49,16 @@ public class OrganizationServiceImpl extends AbstractService<OrganizationReposit
         return null;
     }
 
+    public Void block(Long id) {
+        repository.block(id);
+        return null;
+    }
+
+    public Void unblock(Long id) {
+        repository.unblock(id);
+        return null;
+    }
+
     @Override
     public Void update(OrganizationUpdateDto dto) throws IOException {
         ResourceDto resourceDto = fileStorageService.store(dto.getLogo());
@@ -69,7 +79,7 @@ public class OrganizationServiceImpl extends AbstractService<OrganizationReposit
 
     @Override
     public List<OrganizationDto> getAll(GenericCriteria criteria) {
-        return null;
+        return mapper.toDto(repository.findAll());
     }
 
     @Override

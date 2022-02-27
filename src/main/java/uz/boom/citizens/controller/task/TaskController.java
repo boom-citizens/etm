@@ -11,6 +11,7 @@ import uz.boom.citizens.criteria.GenericCriteria;
 import uz.boom.citizens.dto.task.TaskCreateDto;
 import uz.boom.citizens.dto.task.TaskUpdateDto;
 import uz.boom.citizens.services.task.TaskService;
+import uz.boom.citizens.services.task.TaskServiceImpl;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -18,10 +19,10 @@ import java.util.Date;
 
 @Controller
 @RequestMapping("/task/*")
-public class TaskController extends AbstractController<TaskService> {
+public class TaskController extends AbstractController<TaskServiceImpl> {
 
     @Autowired
-    public TaskController(TaskService service) {
+    public TaskController(TaskServiceImpl service) {
         super(service);
     }
 
@@ -32,15 +33,15 @@ public class TaskController extends AbstractController<TaskService> {
     }
 
 
-    @RequestMapping(value = "create/", method = RequestMethod.GET)
+    @RequestMapping(value = "create/{id}/", method = RequestMethod.GET)
     private String addTaskPage() {
         return "task/create";
     }
 
-    @RequestMapping(value = "create/", method = RequestMethod.POST)
-    private String add(@ModelAttribute TaskCreateDto createDto) throws IOException {
-        service.create(createDto);
-        return "redirect:/task/list";
+    @RequestMapping(value = "create/{id}/", method = RequestMethod.POST)
+    private String add(@PathVariable Long id,@ModelAttribute TaskCreateDto createDto) throws IOException {
+        service.createWithId(createDto,id);
+        return "redirect:/column/internal/"+id+"/";
     }
 
     @RequestMapping(value = "update/{id}/", method = RequestMethod.GET)

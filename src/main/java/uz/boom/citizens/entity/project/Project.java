@@ -16,7 +16,7 @@ public class Project extends Auditable {
     @Column(name = "tz_path")
     private String tzPath;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "organization_id", referencedColumnName = "id")
     private Organization organization_id;
 

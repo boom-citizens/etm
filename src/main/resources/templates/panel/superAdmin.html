@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task management</title>
+    <link rel="stylesheet" href="/css/shablon.css"/>
+    <!-- google font link  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500;600;700&family=Red+Hat+Display&display=swap"
+            rel="stylesheet">
+
+    <!-- font awesome link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+<body>
+
+<header>
+    <main>
+        <div class="menu-bar">
+            <i class="fas fa-bars"></i>
+        </div>
+        <h3>Super admin</h3>
+
+        <div class="link">
+            <a th:href="@{/organization/list/}"> Organization</a>
+            <a th:href="@{/superAdmin/lists/}">Super Admin control</a>
+            <a th:href="@{/admin/lists/}">Admin control</a>
+        </div>
+    </main>
+
+    <aside>
+        <nav>
+            <div class="input">
+                <div>
+                    <i class="fas fa-search"></i>
+                </div>
+
+                <input type="text" placeholder="Search">
+            </div>
+
+            <div class="user-information">
+                <div class="user">
+                    <img th:src="@{${session_user.profileImage}}" style="width: 50px;" alt="logo"/>
+                    <p th:text="${session_user.username}">
+                        <i class="fas fa-angle-down"></i>
+                    </p>
+                </div>
+
+                <div class="icon">
+                    <a th:href="@{/auth/logout}" class="btn btn-outline-danger">logout</a>
+                </div>
+
+            </div>
+        </nav>
+
+        <!--<div class="container">
+            &lt;!&ndash;            <h3 th:text="${user.fullName}"></h3>&ndash;&gt;
+            <div class="content">
+                <div class="contents">
+                    <div class="content-text">
+                        <p>Users</p>
+                        <p>Export</p>
+                    </div>
+                    <div class="box" th:each="user,iter :  ${users}">
+                        <p th:text="${user.fullName}"></p>
+                        <span><img th:src="@{${user.profileImage}}" alt=""></span>
+                        <div class="box-text">
+                            <span th:text="${user.username}"></span>
+                            <span th:text="${user.phone}"></span>
+                            <span th:text="${user.email}"></span>
+                            <span th:text="${user.language}"></span>
+                            <span th:text="${user.created_at}"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <div class="content-text">
+                        <p>Tasks</p>
+                    </div>
+                    <div class="box">
+
+                        <div class="box-text">
+                            <p>ОсОО “Energi.kg”</p>
+                            <span>
+                                        <img src="./assets/imges/sunrise.png" alt="">12/04/2021
+                                    </span>
+                        </div>
+
+                    </div>
+
+                    <div class="box">
+
+                        <div class="box-text">
+                            <p>ОсОО “Energi.kg”</p>
+                            <span>
+                                        <img src="./assets/imges/sunrise.png" alt="">12/04/2021
+                                    </span>
+                        </div>
+
+                    </div>
+
+                    <div class="box">
+
+                        <div class="box-text">
+                            <p>ОсОО “Energi.kg”</p>
+                            <span>
+                                        <img src="./assets/imges/sunrise.png" alt="">12/04/2021
+                                    </span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+        <!--<div class="container">
+            <h3>Super admin</h3>
+            <div class="content" style=" grid-template-columns: 300px 750px;!important;">
+                <div class="contents">
+                    <img src="/images/portfolio.jpg" width="100%"/>
+                </div>
+
+                <div class="contents">
+                    <div class="content-text">
+                        <p>Projects</p>
+                        <p>Export</p>
+                    </div>
+                    <div class="box">
+                        <p>ОсОО “Energi.kg”</p>
+                        <div class="box-text">
+                                    <span>
+                                        <img src="./assets/imges/sunrise.png" alt="">12/04/2021
+                                    </span>
+                            <span>
+                                        <img src="./assets/imges/sunset2.png" alt=""> 12/04/2021
+                                    </span>
+                            <span>
+                                       <img src="./assets/imges/users.png" alt=""> Adyl, Azhar, Arthur
+                                    </span>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <p>ОсОО “Energi.kg”</p>
+                        <div class="box-text">
+                                    <span>
+                                        <img src="./assets/imges/sunrise.png" alt="">12/04/2021
+                                    </span>
+                            <span>
+                                        <img src="./assets/imges/sunset2.png" alt=""> 12/04/2021
+                                    </span>
+                            <span>
+                                       <img src="./assets/imges/users.png" alt=""> Adyl, Azhar, Arthur
+                                    </span>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <p>ОсОО “Energi.kg”</p>
+                        <div class="box-text">
+                                    <span>
+                                        <img src="./assets/imges/sunrise.png" alt="">12/04/2021
+                                    </span>
+                            <span>
+                                        <img src="./assets/imges/sunset2.png" alt=""> 12/04/2021
+                                    </span>
+                            <span>
+                                       <img src="./assets/imges/users.png" alt=""> Adyl, Azhar, Arthur
+                                    </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content pt-5" style=" grid-template-columns: 330px 330px;">
+                <div class="content pt-5" style=" grid-template-columns: 330px 330px;!important;">
+                    <div class="contents"></div>
+                </div>
+                <div class="content pt-5" style=" grid-template-columns: 330px 330px;!important;">
+                    <div class="contents"></div>
+                    <div class="contents"></div>
+                </div>
+            </div>
+        </div>
+-->
+    </aside>
+
+</header>
+
+<script>
+    const menu = document.querySelector(".menu-bar")
+    const main = document.querySelector("main")
+    menu.addEventListener("click", () => {
+        main.classList.toggle("open")
+    })
+</script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+</html>

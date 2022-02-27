@@ -77,79 +77,82 @@
                         <p><b>Frozen:</b> 1</p>
                     </div>
                 </div>
-<!--                <table>-->
-<!--                    <tr th:each="column,iter :  ${columns}">-->
-<!--                        <th th:text="${iter.count}"></th>-->
-<!--                        <th th:text="${column.name}"></th>-->
-<!--                    </tr>-->
-<!--                </table>-->
+                <!--                <table>-->
+                <!--                    <tr th:each="column,iter :  ${columns}">-->
+                <!--                        <th th:text="${iter.count}"></th>-->
+                <!--                        <th th:text="${column.name}"></th>-->
+                <!--                    </tr>-->
+                <!--                </table>-->
                 <div class="todoContainer">
                     <div class="todoContent-box" th:each="column,iter :  ${columns}">
                         <div class="todo-img">
-                            <p th:text="'Column : '+${column.name}"></p>
-                            <img src="../../static/imges/plus-circle.png" alt="">
+                            <a th:href="@{/column/detail/{id}/(id=${column.id})}"
+                               th:text="'Column : '+${column.name}"></a>
+                            <a th:href="@{/task/create/{id}/(id=${project.id})}">
+                                <img src="/imges/plus-circle.png" alt="">
+                            </a>
                         </div>
-                        <div class="todo-box" th:each="task,iter :  ${tasks}">
-                            <h4 th:text="'Task : '+${task.name}">
-                                <button class="medium">Medium</button>
-                            </h4>
-                            <p><span>Participant:  </span>Azhar</p>
-                            <p><span>Participant:  </span>Azhar</p>
+                        <div class="todo-box" th:each="task,iter :  ${tasks}" th:if="${task.columnId.id==column.id}">
+                            <div>
+                                <h4 th:text="'Task : '+${task.name}">
+                                    <button class="medium">Medium</button>
+                                </h4>
+                                <p><span>Participant:  </span>Azhar</p>
+                                <p><span>Participant:  </span>Azhar</p>
+                            </div>
                         </div>
-
-                        <!--<div class="todo-box">
-                            <h4>CRM system design
-                                <button class="low">Low</button>
-                            </h4>
-                            <p><span>Participant:  </span>Azhar</p>
-                            <p><span>Participant:  </span>Azhar</p>
-                        </div>
-
-                        <div class="todo-box">
-                            <h4>CRM system design
-                                <button class="high">High</button>
-                            </h4>
-                            <p><span>Participant:  </span>Azhar</p>
-                            <p><span>Participant:  </span>Azhar</p>
-                        </div>-->
                     </div>
-<!--                    <div class="todoContent-box">-->
-<!--                        <div class="todo-img">-->
-<!--                            <p>To do</p>-->
-<!--                        </div>-->
-<!--                        <div class="todo-box">-->
-<!--                            <h4>CRM system design-->
-<!--                                <button class="low">Low</button>-->
-<!--                            </h4>-->
-<!--                            <p><span>Participant:  </span>Azhar</p>-->
-<!--                            <p><span>Participant:  </span>Azhar</p>-->
-<!--                        </div>-->
+                    <!--<div class="todo-box">
+                        <h4>CRM system design
+                            <button class="low">Low</button>
+                        </h4>
+                        <p><span>Participant:  </span>Azhar</p>
+                        <p><span>Participant:  </span>Azhar</p>
+                    </div>
 
-<!--                        <div class="todo-box">-->
-<!--                            <h4>CRM system design-->
-<!--                                <button class="low">Low</button>-->
-<!--                            </h4>-->
-<!--                            <p><span>Participant:  </span>Azhar</p>-->
-<!--                            <p><span>Participant:  </span>Azhar</p>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="todoContent-box">-->
-<!--                        <div class="todo-img">-->
-<!--                            <p>To do</p>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="todoContent-box">-->
-<!--                        <div class="todo-img">-->
-<!--                            <p>To do</p>-->
-<!--                        </div>-->
-<!--                        <div class="todo-box">-->
-<!--                            <h4>CRM system design-->
-<!--                                <button class="low">Low</button>-->
-<!--                            </h4>-->
-<!--                            <p><span>Participant:  </span>Azhar</p>-->
-<!--                            <p><span>Participant:  </span>Azhar</p>-->
-<!--                        </div>-->
-<!--                    </div>-->
+                    <div class="todo-box">
+                        <h4>CRM system design
+                            <button class="high">High</button>
+                        </h4>
+                        <p><span>Participant:  </span>Azhar</p>
+                        <p><span>Participant:  </span>Azhar</p>
+                    </div>-->
+                    <!--                    <div class="todoContent-box">-->
+                    <!--                        <div class="todo-img">-->
+                    <!--                            <p>To do</p>-->
+                    <!--                        </div>-->
+                    <!--                        <div class="todo-box">-->
+                    <!--                            <h4>CRM system design-->
+                    <!--                                <button class="low">Low</button>-->
+                    <!--                            </h4>-->
+                    <!--                            <p><span>Participant:  </span>Azhar</p>-->
+                    <!--                            <p><span>Participant:  </span>Azhar</p>-->
+                    <!--                        </div>-->
+                    <!--                        <div class="todo-box">-->
+                    <!--                            <h4>CRM system design-->
+                    <!--                                <button class="low">Low</button>-->
+                    <!--                            </h4>-->
+                    <!--                            <p><span>Participant:  </span>Azhar</p>-->
+                    <!--                            <p><span>Participant:  </span>Azhar</p>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+                    <!--                    <div class="todoContent-box">-->
+                    <!--                        <div class="todo-img">-->
+                    <!--                            <p>To do</p>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+                    <!--                    <div class="todoContent-box">-->
+                    <!--                        <div class="todo-img">-->
+                    <!--                            <p>To do</p>-->
+                    <!--                        </div>-->
+                    <!--                        <div class="todo-box">-->
+                    <!--                            <h4>CRM system design-->
+                    <!--                                <button class="low">Low</button>-->
+                    <!--                            </h4>-->
+                    <!--                            <p><span>Participant:  </span>Azhar</p>-->
+                    <!--                            <p><span>Participant:  </span>Azhar</p>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
                 </div>
             </div>
         </div>

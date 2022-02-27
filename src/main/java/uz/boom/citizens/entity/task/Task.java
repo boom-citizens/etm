@@ -16,11 +16,11 @@ import java.util.Date;
 public class Task extends Auditable {
 
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "project_id", referencedColumnName = "id")
     private Project projectId;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "column_id", referencedColumnName = "id")
     private ProjectColumn columnId;
 

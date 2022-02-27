@@ -10,14 +10,13 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
-
 @Table(name = "column" , schema = "etm")
 public class ProjectColumn extends Auditable {
 
     @Column(name = "name",nullable = false, length = 100)
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "project_id")
     private Project project_id;
 

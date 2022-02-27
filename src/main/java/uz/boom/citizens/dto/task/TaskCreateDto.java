@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import uz.boom.citizens.dto.Dto;
+import uz.boom.citizens.entity.columns.ProjectColumn;
+import uz.boom.citizens.entity.project.Project;
 
 import java.util.Date;
 
@@ -13,6 +15,8 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 public class TaskCreateDto implements Dto {
+    private Project projectId;
+    private ProjectColumn columnId;
     private String name;
     private String description;
     private String level;

@@ -46,6 +46,7 @@ public class ProjectServiceImpl extends AbstractService<ProjectRepository, Proje
         ResourceDto resourceDto = fileStorageService.store(createDto.getTz());
         Project project = mapper.fromCreateDto(createDto);
         project.setClosed(false);
+        project.setOrganization(SessionUser.session().getOrganization());
         project.setTzPath("/uploads/" + resourceDto.getPath());
         repository.save(project);
         return project.getId();

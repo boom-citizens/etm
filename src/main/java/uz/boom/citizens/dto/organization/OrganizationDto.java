@@ -15,6 +15,7 @@ public class OrganizationDto extends GenericDto {
     private String email;
     private String code;
     private String location;
+    private boolean blocked;
     private Long owner;
 
 

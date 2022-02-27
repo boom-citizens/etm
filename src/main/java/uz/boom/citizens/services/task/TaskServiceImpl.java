@@ -1,13 +1,16 @@
 package uz.boom.citizens.services.task;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import uz.boom.citizens.criteria.GenericCriteria;
 import uz.boom.citizens.dto.task.TaskCreateDto;
 import uz.boom.citizens.dto.task.TaskDto;
 import uz.boom.citizens.dto.task.TaskUpdateDto;
+import uz.boom.citizens.entity.columns.ProjectColumn;
 import uz.boom.citizens.entity.project.Project;
 import uz.boom.citizens.entity.task.Task;
 import uz.boom.citizens.mapper.task.TaskMapper;
+import uz.boom.citizens.reposiroty.colmun.ColumnRepository;
 import uz.boom.citizens.reposiroty.project.ProjectRepository;
 import uz.boom.citizens.reposiroty.task.TaskRepository;
 import uz.boom.citizens.services.AbstractService;
@@ -17,14 +20,17 @@ import uz.boom.citizens.utils.validators.task.TaskValidator;
 import java.io.IOException;
 import java.util.List;
 
+@Transactional
 @Service
 public class TaskServiceImpl extends AbstractService<TaskRepository, TaskMapper, TaskValidator> implements TaskService {
 
     private final ProjectRepository projectRepository;
+    private final ColumnRepository columnRepository;
 
-    protected TaskServiceImpl(TaskRepository repository, TaskMapper mapper, TaskValidator validator, BaseUtils baseUtils, ProjectRepository projectRepository) {
+    protected TaskServiceImpl(TaskRepository repository, TaskMapper mapper, TaskValidator validator, BaseUtils baseUtils, ProjectRepository projectRepository, ColumnRepository columnRepository) {
         super(repository, mapper, validator, baseUtils);
         this.projectRepository = projectRepository;
+        this.columnRepository = columnRepository;
     }
 
     @Override
@@ -32,6 +38,14 @@ public class TaskServiceImpl extends AbstractService<TaskRepository, TaskMapper,
         Task task = mapper.fromCreateDto(createDto);
         repository.save(task);
         return task.getId();
+    }
+
+    public void createWithId(TaskCreateDto createDto, Long colId) throws IOException {
+        Task task = mapper.fromCreateDto(createDto);
+        ProjectColumn column = columnRepository.getById(colId);
+        task.setColumnId(column);
+        task.setProjectId(column.getProject_id());
+        repository.save(task);
     }
 
     @Override

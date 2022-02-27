@@ -22,7 +22,7 @@
 <body>
 <main>
 
-    <h1>Delete Organization Page</h1>
+    <h1>Unblock Organization Page</h1>
     <div class="container">
         <div class="row">
             <div class="col-8 mx-auto">
@@ -31,9 +31,10 @@
                     <li th:text="'Email : ' +${organization.email}"></li>
                     <li th:text="'Code : '+${organization.code}"></li>
                 </ul>
-                <form method="post" th:action="@{/organization/delete/{id}(id=${organization.id})}">
+                <form method="post" th:action="@{/organization/unblock/{id}(id=${organization.id})}">
+                    <p>Are you sure ?</p>
                     <button type="submit" class="btn btn-danger">Yes</button>
-                    <a method="get" th:href="@{/organization/list/}" class="btn btn-warning">No</a>
+                    <a method="post" th:href="@{/organization/list/}" class="btn btn-warning">No</a>
                 </form>
             </div>
         </div>
