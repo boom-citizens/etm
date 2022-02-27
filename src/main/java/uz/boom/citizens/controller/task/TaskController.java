@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import uz.boom.citizens.configs.security.SessionUser;
 import uz.boom.citizens.controller.AbstractController;
 import uz.boom.citizens.criteria.GenericCriteria;
 import uz.boom.citizens.dto.task.TaskCreateDto;
@@ -33,15 +34,22 @@ public class TaskController extends AbstractController<TaskServiceImpl> {
     }
 
 
-    @RequestMapping(value = "create/{id}/", method = RequestMethod.GET)
+    @RequestMapping(value = "create/{projectId}/{id}/", method = RequestMethod.GET)
     private String addTaskPage() {
         return "task/create";
     }
 
-    @RequestMapping(value = "create/{id}/", method = RequestMethod.POST)
-    private String add(@PathVariable Long id,@ModelAttribute TaskCreateDto createDto) throws IOException {
+    @RequestMapping(value = "create/{projectId}/{id}", method = RequestMethod.POST)
+    private String add(@PathVariable Long id,@PathVariable Long projectId,@ModelAttribute TaskCreateDto createDto) throws IOException {
         service.createWithId(createDto,id);
-        return "redirect:/column/internal/"+id+"/";
+        return "redirect:/column/internal/"+ projectId+"/";
+    }
+
+    @RequestMapping(value = "internal/{id}/", method = RequestMethod.GET)
+    public String internalPage(Model model, @PathVariable(name = "id") Long id) {
+        model.addAttribute("session_user", SessionUser.session());
+        model.addAttribute("task",service.get(id));
+        return "task/internal_task";
     }
 
     @RequestMapping(value = "update/{id}/", method = RequestMethod.GET)

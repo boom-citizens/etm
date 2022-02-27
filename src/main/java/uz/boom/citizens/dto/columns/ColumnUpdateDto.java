@@ -15,11 +15,13 @@ import uz.boom.citizens.entity.project.Project;
 public class ColumnUpdateDto extends GenericDto {
     private String name;
     private MultipartFile icon;
+    private Boolean actice;
 
-    public ColumnUpdateDto(Long id, String name,  MultipartFile icon) {
+    public ColumnUpdateDto(Long id, String name,  MultipartFile icon,Boolean actice) {
         super(id);
         this.name = name;
         this.icon = icon;
+        this.actice=actice;
     }
 
 

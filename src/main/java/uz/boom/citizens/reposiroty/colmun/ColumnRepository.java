@@ -15,6 +15,6 @@ import java.util.List;
 @Repository
 public interface ColumnRepository extends JpaRepository<ProjectColumn, Long>, AbstractRepository {
 
-    @Query("from ProjectColumn p where p.project_id=:project")
+    @Query("from ProjectColumn c where c.project_id=:project order by c.position")
     List<ProjectColumn> findAllByProject_id(@Param("project") Project project);
 }

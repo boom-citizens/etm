@@ -51,6 +51,15 @@ public class ColumnServiceImpl extends AbstractService<
         return column.getId();
     }
 
+    public Long createWithId(ColumnCreateDto createDto,Long projectId) throws IOException {
+        ResourceDto resourceDto = fileStorageService.store(createDto.getIcon());
+        ProjectColumn column = mapper.fromCreateDto(createDto);
+        column.setIcon("/uploads/"+resourceDto.getPath());
+        column.setProject_id(projectRepository.getById(projectId));
+        repository.save(column);
+        return column.getId();
+    }
+
     @Override
     public Void delete(Long id) {
         repository.deleteById(id);
@@ -70,12 +79,14 @@ public class ColumnServiceImpl extends AbstractService<
             ResourceDto resourceDto = fileStorageService.store(updateDto.getIcon());
             column.setIcon("/uploads/" + resourceDto.getPath());
         }
+        if(updateDto.getActice()!=column.getActive()){
+            column.setActive(updateDto.getActice());
+        }
 
 //        column.setPosition(updateDto.getPosition());
 //        column.setActive(updateDto.getActive());
 //        column.setProject_id(updateDto.getProject_id());
 
-        mapper.fromUpdateDto(updateDto, column);
         repository.save(column);
         return null;
     }
