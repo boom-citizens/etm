@@ -59,7 +59,7 @@ public class AuthController extends AbstractController<AuthUserService> {
         }
 
         service.create(dto);
-        return "task_managemen/shablon";
+        return "redirect:/";
     }
 
     @RequestMapping(value = "reset-password", method = RequestMethod.GET)
