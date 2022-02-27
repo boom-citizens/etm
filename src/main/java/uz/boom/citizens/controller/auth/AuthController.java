@@ -43,6 +43,7 @@ public class AuthController extends AbstractController<AuthUserService> {
     @RequestMapping(value = "create", method = RequestMethod.GET)
     public String createPage(Model model) {
         AuthUserCreateDto dto = new AuthUserCreateDto();
+        model.addAttribute("session_user", SessionUser.session());
         model.addAttribute("dto", dto);
         model.addAttribute("permissions", permissionService.getAll());
         model.addAttribute("languages", languageService.getAll());
@@ -58,7 +59,7 @@ public class AuthController extends AbstractController<AuthUserService> {
         }
 
         service.create(dto);
-        return "task_managemen/index";
+        return "task_managemen/shablon";
     }
 
     @RequestMapping(value = "reset-password", method = RequestMethod.GET)
