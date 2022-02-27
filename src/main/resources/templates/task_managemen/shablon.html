@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title text="Task management"></title>
-    <link rel="stylesheet" href="/static/css/shablon.css"/>
+    <title>Task management</title>
+    <link rel="stylesheet" href="/css/shablon.css"/>
     <!-- google font link  -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,19 +28,14 @@
         <div class="menu-bar">
             <i class="fas fa-bars"></i>
         </div>
+        <h3 th:text="${session_user?.organization?.name}"></h3>
         <div class="logo">
             <!--<img src="../static/imges/logo.png" alt="">-->
-            <img th:src="@{${session?.organization?.logo}}" class="img-thumbnail" alt="logo" th:width="100px"/>
+            <img th:src="@{${session_user?.organization?.logo}}" class="img-thumbnail" alt="logo" th:width="100px"/>
         </div>
 
-        <div class="link" th:each="permission : ${session?.role?.permissions}">
-
+        <div class="link" th:each="permission : ${session_user?.role?.permissions}">
             <a href="#" th:text="${permission?.code}"></a>
-
-            <a href="#"> -- Clients</a>
-            <a href="#">Task manager</a>
-            <a href="#">Inbox</a>
-            <a href="#">Contacts</a>
         </div>
     </main>
 
@@ -61,8 +56,8 @@
                 </div>
 
                 <div class="user">
-                    <img th:src="@{${session.profileImage}}" alt="logo"/>
-                    <p th:text="${session.username}">
+                    <img th:src="@{${session_user.profileImage}}" style="width: 50px;" alt="logo"/>
+                    <p th:text="${session_user.username}">
                         <i class="fas fa-angle-down"></i>
                     </p>
                 </div>
@@ -71,8 +66,6 @@
         </nav>
 
         <div class="container">
-            <h3 th:text="${session?.organization?.name}"></h3>
-
             <div class="content">
                 <div class="contents">
                     <div class="content-text">

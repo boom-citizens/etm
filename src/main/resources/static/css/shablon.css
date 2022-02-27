@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Rubik;
+  font-family: Rubik, serif;
 }
 
 header {
@@ -28,7 +28,7 @@ header main {
 }
 
 .link {
-  margin-top: 100px;
+  margin-top: 0;
 }
 
 .link a {

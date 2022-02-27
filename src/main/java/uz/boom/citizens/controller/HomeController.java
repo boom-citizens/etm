@@ -30,7 +30,7 @@ public class HomeController {
 
     @RequestMapping(value = {"index"}, method = RequestMethod.GET)
     public String indexPage(Model model) {
-        model.addAttribute("session", SessionUser.session());
+        model.addAttribute("session_user", SessionUser.session());
         model.addAttribute("projects", projectService.getAll(new GenericCriteria()));
         model.addAttribute("tasks", taskService.getAll(new GenericCriteria()));
         return "task_managemen/shablon";
