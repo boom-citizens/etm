@@ -27,23 +27,17 @@ public class HomeController {
     }
 
 
-    @RequestMapping(value = {"wgindexfefwe"}, method = RequestMethod.GET)
-    public String indexPage(Model model) {
-        model.addAttribute("session_user", SessionUser.session());
-        model.addAttribute("projects", projectService.getAll(new GenericCriteria()));
-        model.addAttribute("tasks", taskService.getAll(new GenericCriteria()));
-        return "task_managemen/shablon";
-    }
-
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("isAuthenticated()"   )
     @RequestMapping(value = "index", method = RequestMethod.GET)
     public String homePage(Model model) {
         model.addAttribute("session_user",SessionUser.session());
         model.addAttribute("projects", projectService.getAll(new GenericCriteria()));
+        model.addAttribute("my_projects", projectService.getAllById(new GenericCriteria(),SessionUser.session().getId()));
+        model.addAttribute("tasks_emp", taskService.getAll(new GenericCriteria()));
         UserDetails user = SessionUser.session();
         if (user.isSuperUser()) return "panel/superAdmin";
         if (user.getRole().getCode().equals("ADMIN")) return "panel/admin";
         if (user.getRole().getCode().equals("MANAGER")) return "panel/manager";
-        return "task_managemen/shablon";
+        return "panel/employee";
     }
 }

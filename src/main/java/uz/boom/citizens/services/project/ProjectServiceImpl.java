@@ -21,6 +21,7 @@ import uz.boom.citizens.utils.validators.project.ProjectValidator;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Author : Qozoqboyev Ixtiyor
@@ -33,11 +34,13 @@ public class ProjectServiceImpl extends AbstractService<ProjectRepository, Proje
 
     private final FileStorageService fileStorageService;
     private final OrganizationRepository organizationRepository;
+    private final ProjectMemberRepository projectMemberRepository;
 
-    public ProjectServiceImpl(ProjectRepository repository, ProjectMapper mapper, ProjectValidator validator, BaseUtils baseUtils, FileStorageService fileStorageService, ProjectMemberRepository projectMemberRepository, OrganizationRepository organizationRepository) {
+    public ProjectServiceImpl(ProjectRepository repository, ProjectMapper mapper, ProjectValidator validator, BaseUtils baseUtils, FileStorageService fileStorageService, ProjectMemberRepository projectMemberRepository, OrganizationRepository organizationRepository, ProjectMemberRepository projectMemberRepository1) {
         super(repository, mapper, validator, baseUtils);
         this.fileStorageService = fileStorageService;
         this.organizationRepository = organizationRepository;
+        this.projectMemberRepository = projectMemberRepository1;
     }
 
 
@@ -70,16 +73,25 @@ public class ProjectServiceImpl extends AbstractService<ProjectRepository, Proje
             ResourceDto resourceDto = fileStorageService.store(dto.getTzFile());
             project.setTzPath("/uploads/" + resourceDto.getPath());
         }
-        project.setClosed(dto.getClosed());
+        if(Objects.isNull(dto.getClosed())){
+         project.setClosed(false);
+        }else {
+            project.setClosed(true);
+        }
         repository.save(project);
         return null;
     }
 
     @Override
     public List<ProjectDto> getAllById(GenericCriteria criteria, Long id) {
-        UserDetails session = SessionUser.session();
-        //Long orgId = session.getOrganization().getId();
-        return mapper.toDto(repository.findAll());
+        List<Long> projectIdList = projectMemberRepository.findProjectIdByUser(id);
+        Organization organization=SessionUser.session().getOrganization();
+        List<Project> projects=repository.findAllByOrganization_id(organization);
+
+        for (Long aLong : projectIdList) {
+            projects.removeIf(project -> Objects.equals(project.getId(),aLong));
+        }
+        return mapper.toDto(projects);
     }
 
     @Override

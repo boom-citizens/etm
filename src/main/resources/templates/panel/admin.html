@@ -103,7 +103,14 @@
                         <tbody>
                         <tr th:each="project,iter :  ${projects}">
                             <th th:text="${iter.count}"></th>
-                            <th><a th:href="@{/column/internal/{id}/(id=${project.id})}" th:text="${project.name}" ></a></th>
+                            <th th:if="${project.closed}">
+                                <a style="text-decoration: none" th:text="${project.name}" >
+                                </a>
+                            </th>
+                            <th th:unless="${project.closed}">
+                                <a th:href="@{/column/internal/{id}/(id=${project.id})}" th:text="${project.name}" >
+                                </a>
+                            </th>
                             <th>
                                 <img th:src="@{${project.tzPath}}" class="img-thumbnail" alt="logo"
                                      th:width="100px"/>
@@ -113,6 +120,7 @@
                                 <a class="btn btn-info" th:href="@{/project/detail/{id}/(id=${project.id})}">👁</a>
                                 <a class="btn btn-secondary" th:href="@{/project/update/{id}/(id=${project.id})}">🔄</a>
                                 <a class="btn btn-dark" th:href="@{/project/delete/{id}/(id=${project.id})}">🗑</a>
+                                <a class="btn btn-success" th:href="@{/project/members/{id}/(id=${project.id})}">🙎‍♂️🙍‍♀️</a>
                             </th>
                         </tr>
                         </tbody>

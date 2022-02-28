@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragment.html :: head(title='Project member delete page',path='/css/index.css')">
+</head>
+<body>
+<!--<header>-->
+<!--    <section th:include="fragment.html :: navbar"></section>-->
+<!--</header>-->
+<main>
+
+    <h1>Project member delete page</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-8 mx-auto">
+                <ul>
+                    <li th:text="${member.username}"></li>
+                </ul>
+                <form th:method="post">
+                    <button type="submit" class="btn btn-danger">Yes</button>
+                    <a th:href="@{/index}" class="btn btn-warning">No</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+<footer>
+    <section th:include="fragment.html :: js-files"></section>
+</footer>
+</body>
+</html>

@@ -56,7 +56,7 @@ public class TaskServiceImpl extends AbstractService<TaskRepository, TaskMapper,
 
     @Override
     public List<TaskDto> getAll(GenericCriteria criteria) {
-        return null;
+        return mapper.toDto(repository.findAll());
     }
 
     @Override

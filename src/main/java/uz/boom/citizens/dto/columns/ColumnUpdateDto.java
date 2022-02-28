@@ -11,7 +11,6 @@ import uz.boom.citizens.entity.project.Project;
 @Getter
 @Setter
 
-
 public class ColumnUpdateDto extends GenericDto {
     private String name;
     private MultipartFile icon;
@@ -21,8 +20,6 @@ public class ColumnUpdateDto extends GenericDto {
         super(id);
         this.name = name;
         this.icon = icon;
-        this.actice=actice;
+        this.actice = actice;
     }
-
-
 }

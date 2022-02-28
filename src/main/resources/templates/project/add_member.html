@@ -10,14 +10,13 @@
     <div class="container">
         <div class="row">
             <div class="col-10 mx-auto">
-                <form th:method="post" enctype="multipart/form-data">
-
+                <form th:method="post">
+                    <h4 th:text="'Organization : '+${org.name}"></h4>
                     <label for="users">Users : </label>
                     <ul class="form-check" th:each="user : ${users}" >
                         <input class="form-check-input" type="checkbox" name="users"
-                               id="users" th:value="user.id"
-                               aria-label="..." th:text="${user.username}">
-                    </ul>
+                               id="users" th:value="${user.id}"
+                               aria-label="..." th:text="'Username : '+${user.username}+', Email : '+${user.email}"></ul>
                     <button type="submit" class="btn btn-primary">➕ Save</button>
                 </form>
             </div>

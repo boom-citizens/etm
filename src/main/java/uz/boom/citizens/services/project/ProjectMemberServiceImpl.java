@@ -11,6 +11,7 @@ import uz.boom.citizens.reposiroty.auth.AuthUserRepository;
 import uz.boom.citizens.reposiroty.project.ProjectMemberRepository;
 import uz.boom.citizens.reposiroty.project.ProjectRepository;
 import uz.boom.citizens.services.AbstractService;
+import uz.boom.citizens.services.auth.AuthUserService;
 import uz.boom.citizens.utils.BaseUtils;
 import uz.boom.citizens.utils.validators.project.ProjectValidator;
 
@@ -39,7 +40,7 @@ public class ProjectMemberServiceImpl extends AbstractService<ProjectMemberRepos
     }
 
     public List<AuthUserDto> getMembers(Long id) {
-        List<ProjectMember> projectMembers = repository.findAllByProjectId(id);
+        List<ProjectMember> projectMembers = repository.findAllByProject(id);
         List<AuthUser> authUsers=new ArrayList<>();
         for (ProjectMember projectMember : projectMembers) {
             authUsers.add(projectMember.getAuthUser());
@@ -47,17 +48,16 @@ public class ProjectMemberServiceImpl extends AbstractService<ProjectMemberRepos
         return authUserMapper.toDto(authUsers);
     }
 
-    public List<AuthUserDto> getUsers(Long id) {
-        Project project = projectRepository.findById((id)).orElseThrow(() -> {
+    public void delete(Long id) {
+        AuthUser authUser = authUserRepository.findById(id).orElseThrow(() -> {
             throw new RuntimeException("Topilmadi");
         });
-
-        Long orgId = project.getOrganization().getId();
-        List<AuthUser> users = authUserRepository.findAllByOrganization_Id(orgId);
-        return authUserMapper.toDto(users);
+        repository.deleteByAuthUser(authUser);
     }
 
-    public void addUser(Long id, List<Long> idList) {
-
+    public void addUser(Long id, List<Long> userIdList) {
+        for (Long aLong : userIdList) {
+            repository.insertMember(id,aLong);
+        }
     }
 }

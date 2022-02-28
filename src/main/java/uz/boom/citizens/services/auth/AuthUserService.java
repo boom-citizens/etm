@@ -5,14 +5,18 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import uz.boom.citizens.configs.security.SessionUser;
 import uz.boom.citizens.criteria.GenericCriteria;
 import uz.boom.citizens.dto.auth.AuthUserCreateDto;
 import uz.boom.citizens.dto.auth.AuthUserDto;
 import uz.boom.citizens.dto.auth.AuthUserUpdateDto;
 import uz.boom.citizens.dto.file.ResourceDto;
 import uz.boom.citizens.entity.auth.AuthUser;
+import uz.boom.citizens.entity.organization.Organization;
+import uz.boom.citizens.entity.project.ProjectMember;
 import uz.boom.citizens.mapper.auth.AuthUserMapper;
 import uz.boom.citizens.reposiroty.auth.AuthUserRepository;
+import uz.boom.citizens.reposiroty.project.ProjectMemberRepository;
 import uz.boom.citizens.services.AbstractService;
 import uz.boom.citizens.services.file.FileStorageService;
 import uz.boom.citizens.utils.BaseUtils;
@@ -33,15 +37,17 @@ public class AuthUserService extends AbstractService<AuthUserRepository, AuthUse
     private final PasswordEncoder passwordEncoder;
     private final RoleService roleService;
     protected final ObjectMapper objectMapper;
+    protected final ProjectMemberRepository projectMemberRepository;
 
 
     @Autowired
-    protected AuthUserService(AuthUserRepository repository, AuthUserMapper mapper, AuthUserValidator validator, BaseUtils baseUtils, FileStorageService fileStorageService, PasswordEncoder passwordEncoder, RoleService roleService, ObjectMapper objectMapper) {
+    protected AuthUserService(AuthUserRepository repository, AuthUserMapper mapper, AuthUserValidator validator, BaseUtils baseUtils, FileStorageService fileStorageService, PasswordEncoder passwordEncoder, RoleService roleService, ObjectMapper objectMapper, ProjectMemberRepository projectMemberRepository) {
         super(repository, mapper, validator, baseUtils);
         this.fileStorageService = fileStorageService;
         this.passwordEncoder = passwordEncoder;
         this.roleService = roleService;
         this.objectMapper = objectMapper;
+        this.projectMemberRepository = projectMemberRepository;
     }
 
     @Override
@@ -74,17 +80,30 @@ public class AuthUserService extends AbstractService<AuthUserRepository, AuthUse
 
     @Override
     public List<AuthUserDto> getAllById(GenericCriteria criteria, Long id) {
-        return null;
+        List<Long> userIdList = projectMemberRepository.findUserIdByProject(id);
+        Organization organization = SessionUser.session().getOrganization();
+        List<AuthUser> authUsers = repository.getAllByOrg(organization);
+
+        for (Long aLong : userIdList) {
+            authUsers.removeIf(authUser -> Objects.equals(authUser.getId(), aLong));
+        }
+        return mapper.toDto(authUsers);
     }
 
     @Override
     public List<AuthUserDto> getAll(GenericCriteria criteria) {
-        return null;
+        Organization organization = SessionUser.session().getOrganization();
+        List<AuthUser> authUsers = repository.getAllByOrg(organization);
+        return mapper.toDto(authUsers);
     }
 
     @Override
     public AuthUserDto get(Long id) {
-        return null;
+        AuthUser authUser = repository.findById((id)).orElseThrow(() -> {
+            throw new RuntimeException("Topilmadi");
+        });
+        return mapper.toDto(authUser);
+
     }
 
     @Override

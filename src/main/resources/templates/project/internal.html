@@ -60,7 +60,7 @@
 
         <div class="container">
             <h3 th:text="'Project : '+${project.name}"></h3>
-            <div class="contents" style="height:500px; overflow-y: scroll;">
+            <div class="contents" style="height:500px; overflow-x: scroll;">
                 <!--<div class="content">
                     <div class="box">
                         <p><b>Date added:</b> <span> 12/04/2021</span></p>
@@ -84,7 +84,8 @@
                 <!--                    </tr>-->
                 <!--                </table>-->
                 <div class="todoContainer">
-                    <div class="todoContent-box" th:each="column,iter :  ${columns}">
+                    <div class="todoContent-box" th:each="column,iter :  ${columns}"
+                         style="height:500px; overflow-x: scroll;">
                         <div class="todo-img">
                             <a th:href="@{/column/detail/{id}/(id=${column.id})}"
                                th:text="'Column : '+${column.name}"></a>
@@ -96,12 +97,12 @@
                         </div>
                         <div class="todo-box" th:each="task,iter :  ${tasks}"
                              th:if="${task.columnId.id==column.id}">
-                            <a th:href="@{/task/internal/{id}/(id=${task.id})}">
+                            <a th:href="@{/task/internal/{id}/(id=${task.id})}" style="text-decoration: none">
                                 <h4 th:text="'Task : '+${task.name}" style="display: inline"></h4>
+                                <h4 style="display: inline"><button class="medium">Medium</button></h4>
                             </a>
-                                <button th:class="medium">Medium</button>
-                                <h4>Description : </h4>
-                                <p th:text="${task.description}"></p>
+                            <h4 style="margin-bottom: 0">Description : </h4>
+                            <p th:text="${task.description}"></p>
                         </div>
                     </div>
                     <div class="todoContainer">

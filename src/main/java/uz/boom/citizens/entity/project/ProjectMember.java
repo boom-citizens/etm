@@ -24,7 +24,7 @@ public class ProjectMember {
     @JoinColumn(name = "user_id")
     private AuthUser authUser;
 
-    @Column(name = "is_lead")
+    @Column(name = "is_lead",columnDefinition = "BOOLEAN DEFAULT false")
     private Boolean isLead;
 
     public Boolean getIsLead() {
